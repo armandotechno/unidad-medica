@@ -97,6 +97,8 @@ const validarLogin = () => {
                 location.href = '/inicio';
             } else if ( data == 2 ) {
                 swal("Alerta", "El usuario no existe en la base de datos.", "warning")
+            } else if ( data == 3 ) {
+                swal("Alerta", "Usuario o contraseña incorrecta.", "warning")
             } else {
                 alert('acá')
             }

@@ -13,7 +13,11 @@ class LoginController extends Controller
         $existeUsuario = User::where("email", $request->correo)->first();
 
         if( $existeUsuario ) {
-            return 1;
+            if ($existeUsuario->password == $request->clave) {
+                return 1;
+            } else {
+                return 3;
+            }
         } else {
             return 2;
         }
