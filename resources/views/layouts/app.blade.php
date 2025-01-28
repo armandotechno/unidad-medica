@@ -24,11 +24,21 @@
             background: linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#061065", endColorstr="#ffffff", GradientType=1); */
         }
-    </style>
-    <style>
+        /* Pseudo-elemento para la superposición */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(241, 241, 241, 0.5); /* Cambia el color y la opacidad aquí */
+            z-index: 1; /* Asegúrate de que esté por encima de la imagen de fondo */
+        }
         .d-flex {
-            height: 100vh;
-            /* Asegúrate de que el contenedor ocupe toda la altura de la ventana */
+            height: 100vh; /* Asegúrate de que el contenedor ocupe toda la altura de la ventana */
+            position: relative; /* Necesario para que el contenido esté por encima de la superposición */
+            z-index: 2; /* Asegúrate de que el contenido esté por encima de la superposición */
         }
     </style>
 </head>
