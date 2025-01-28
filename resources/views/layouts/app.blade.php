@@ -13,11 +13,16 @@
     @show
     <style>
         body {
-            background: rgb(6, 16, 101) no-repeat;
-            background: -moz-linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
+            background-image: url('{{ asset('images/background/background-login.jpg') }}');
+            background-size: contain; /* O usa 'contain' si prefieres que no se recorte */
+            background-position: center; /* Centra la imagen */
+            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+            /* background: rgb(6, 16, 101) no-repeat; */
+            /* background: -moz-linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
             background: -webkit-linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
             background: linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#061065", endColorstr="#ffffff", GradientType=1);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#061065", endColorstr="#ffffff", GradientType=1); */
         }
     </style>
     <style>
