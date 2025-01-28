@@ -12,6 +12,4 @@ const mostrarPassword = () => {
     }
 }
 
-const validarLogin = (  ) => {
-    alert('Validando')
-}
+

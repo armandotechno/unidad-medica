@@ -30,7 +30,7 @@
                     <div class="col-xs-12" style="background-color: #E4E6E9; height: 65px;">
                         <span class="help-block text-muted" style="margin-left: 10px"><small
                                 style="font-weight: bold; color: #474646">Usuario</small></span>
-                        <input class="form-control" type="text" id="username" name="username" required=""
+                        <input class="form-control" type="text" id="correo" name="correo" required=""
                             placeholder="" style="width: 75%; height: 30px; margin-left: 10px;">
                     </div>
                 </div>
@@ -67,5 +67,41 @@
 </div>
 @endsection
 @section('javascript')
+<script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
 <script src="{{ asset('js/login.js') }}"></script>
+<script>
+$(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    });
+
+const validarLogin = () => {
+
+    let correo = $("#correo").val();
+    let clave = $("#password").val();
+
+    $.ajax({
+        type: 'POST',
+        url: "{{ url('validarLogin') }}",
+        data: {
+            correo,
+            clave
+        },
+        success: function(data) {
+            if ( data == 1 ) {
+                location.href = '/inicio';
+            } else if ( data == 2 ) {
+                swal("Alerta", "El usuario no existe en la base de datos.", "warning")
+            } else {
+                alert('acá')
+            }
+        }
+    })
+}
+</script>
 
