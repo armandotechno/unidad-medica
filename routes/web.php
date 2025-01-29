@@ -26,4 +26,7 @@ Route::middleware("auth")->group(function () {
     Route::get('/inicio', function () {
         return view('auth.inicio');
     })->name('inicio');
+
+    Route::get('/registrarPacientes', [App\Http\Controllers\PacienteController::class, 'registrarPacientes'])->name('registrarPacientes');
+
 });
