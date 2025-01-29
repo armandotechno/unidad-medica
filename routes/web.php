@@ -27,6 +27,8 @@ Route::middleware("auth")->group(function () {
         return view('auth.inicio');
     })->name('inicio');
 
+    Route::get('/pacientes', [App\Http\Controllers\PacienteController::class, 'pacientes'])->name('pacientes');
+
     Route::get('/registrarPacientes', [App\Http\Controllers\PacienteController::class, 'registrarPacientes'])->name('registrarPacientes');
 
 });
