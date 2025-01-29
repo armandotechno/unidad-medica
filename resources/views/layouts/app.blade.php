@@ -13,7 +13,7 @@
     @show
     <style>
         body {
-            background-image: url('{{ asset('images/background/background-login.jpg') }}');
+            background-image: url('{{ asset('images/background/background-login.jpeg') }}');
             background-size: contain; /* O usa 'contain' si prefieres que no se recorte */
             background-position: center; /* Centra la imagen */
             background-repeat: no-repeat; /* Evita que la imagen se repita */

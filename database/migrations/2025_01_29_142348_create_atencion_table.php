@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('atencion', function (Blueprint $table) {
             $table->id()->comment('Identificador de la tabla');
             $table->string('nombre', 150)->nullable()->comment('Guarda el nombre de la atencion');
+            $table->integer('estatus_id')->default(1)->comment('Guarda el id del estatus');
         });
     }
 
