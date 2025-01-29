@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre_completo',150)->nullable()->comment('Guarda el nombre del usuario');
             $table->integer('dni')->nullable()->comment('Guarda el número de identificación del usuario');
             $table->string('usuario',50)->nullable()->comment('Guarda el usuario');
+            $table->string('password');
             $table->integer('perfil_id')->nullable()->comment('Guarda el id del perfil');
             $table->integer('estatus_id')->nullable()->default(1)->comment('Guarda el id del estatus');
             $table->integer('usuario_created')->nullable()->comment("Guarda el id del usuario que crea a otro usuario");

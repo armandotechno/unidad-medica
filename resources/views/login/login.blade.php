@@ -30,7 +30,7 @@
                     <div class="col-xs-12" style="background-color: #E4E6E9; height: 65px;">
                         <span class="help-block text-muted" style="margin-left: 10px"><small
                                 style="font-weight: bold; color: #474646">Usuario</small></span>
-                        <input class="form-control" type="text" id="correo" name="correo" required=""
+                        <input class="form-control" type="text" id="usuario" name="usuario" required=""
                             placeholder="" style="width: 75%; height: 30px; margin-left: 10px;">
                     </div>
                 </div>
@@ -82,15 +82,15 @@ $(function() {
 
 const validarLogin = () => {
 
-    let correo = $("#correo").val();
-    let clave = $("#password").val();
+    let usuario = $("#usuario").val();
+    let password = $("#password").val();
 
     $.ajax({
         type: 'POST',
         url: "{{ url('validarLogin') }}",
         data: {
-            correo,
-            clave
+            usuario,
+            password
         },
         success: function(data) {
             if ( data == 1 ) {
