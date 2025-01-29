@@ -15,6 +15,11 @@ Route::post('logout', function () {
 })->name('logout');
 
 Route::post('/validarLogin', [App\Http\Controllers\LoginController::class, 'validarLogin'])->name('validarLogin');
-Route::get('/inicio', function () {
-            return view('auth.inicio');
-        })->name('inicio');
+
+
+
+Route::middleware("auth")->group(function () {
+    Route::get('/inicio', function () {
+        return view('auth.inicio');
+    })->name('inicio');
+});

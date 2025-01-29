@@ -4,24 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function validarLogin(Request $request) {
+    public function validarLogin(Request $request)
+    {
 
-        // Existe en la base de datos
+        $credencial = [
+            "email" => $request->correo,
+            "password" => $request->clave
+        ];
+
         $existeUsuario = User::where("email", $request->correo)->first();
 
-        if( $existeUsuario ) {
-            if ($existeUsuario->password == $request->clave) {
-                return 1;
+        if ($existeUsuario) {
+            if (Auth::attempt($credencial)) {
+                return response()->json(1); // Login successful
             } else {
-                return 3;
+                return response()->json(3); // Incorrect password
             }
         } else {
             return 2;
         }
-
-        // return view('auth.inicio');
     }
 }
