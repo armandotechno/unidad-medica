@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<a href="{{ url('/registrarPacientes') }}" class="btn btn-primary">Nuevo Registro</a>
+<a href="{{ url('/registrarPacientes') }}" class="btn btn-primary" style="background-color: #040404">Nuevo Registro</a>
 
 <div class="container">
     <h4 class="card-title" style="text-align: left">Reporte de Acuerdos Creados</h4>

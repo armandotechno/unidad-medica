@@ -21,6 +21,13 @@ return new class extends Migration
             $table->integer('tiposangre_id')->comment('Guarda el id del tipo de sangre');
             $table->text('observaciones')->nullable()->default(1)->comment('Guarda el id del estatus');
             $table->integer('estatus_id')->default(1)->comment('Guarda el id del estatus');
+            $table->integer('departamento_id')->default(1)->comment('Guarda el id del departamento');
+            $table->integer('provincia_id')->default(1)->comment('Guarda el id de la provincia');
+            $table->integer('distrito_id')->default(1)->comment('Guarda el id del distrito');
+            $table->integer('ubigeo_id')->default(1)->comment('Guarda el id de la ubicación geo');
+            $table->integer('goblocal_id')->default(1)->comment('Guarda el id de la gobernación local');
+            $table->text('direccion')->comment('Guarda la dirección');
+            $table->string('ubihistoria', 250)->comment('Guarda la ubicación de la historia');
             $table->integer('paciente_created')->nullable()->comment("Guarda el id del usuario que crea al paciente");
             $table->timestamp('created_at')->default(now())->comment("Guarda la fecha en que fue creado el paciente");
             $table->integer('paciente_updated')->nullable()->comment("Guarda el id del usuario que actualiza al paciente");
