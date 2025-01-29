@@ -14,6 +14,10 @@ Route::post('logout', function () {
     return redirect('/');
 })->name('logout');
 
+Route::get('/login', function () {
+    return view('login.login');
+})->name('login');
+
 Route::post('/validarLogin', [App\Http\Controllers\LoginController::class, 'validarLogin'])->name('validarLogin');
 
 

@@ -48,8 +48,7 @@
                 </div>
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">
-                        <button type="button" id="btnIngresar" onclick="validarLogin()"
-                            class="btn btn-outline-info"
+                        <button type="button" id="btnIngresar" onclick="validarLogin()" class="btn btn-outline-info"
                             style="border-radius: 20px; background-color: #2c64c6; color: white; width: 150px; margin: auto; padding: 5px 10px; height: 35px;">
                             Ingresar
                         </button>
@@ -72,7 +71,7 @@
 <script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
 <script src="{{ asset('js/login.js') }}"></script>
 <script>
-$(function() {
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -80,30 +79,36 @@ $(function() {
         });
     });
 
-const validarLogin = () => {
-
-    let usuario = $("#usuario").val();
-    let password = $("#password").val();
-
-    $.ajax({
-        type: 'POST',
-        url: "{{ url('validarLogin') }}",
-        data: {
-            usuario,
-            password
-        },
-        success: function(data) {
-            if ( data == 1 ) {
-                location.href = '/inicio';
-            } else if ( data == 2 ) {
-                swal("Alerta", "El usuario no existe en la base de datos.", "warning")
-            } else if ( data == 3 ) {
-                swal("Alerta", "Usuario o contraseña incorrecta.", "warning")
-            } else {
-                alert('acá')
-            }
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Evita el comportamiento por defecto del Enter
+            validarLogin(); // Llama a la función de validación
         }
-    })
-}
-</script>
+    });
 
+    const validarLogin = () => {
+
+        let usuario = $("#usuario").val();
+        let password = $("#password").val();
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('validarLogin') }}",
+            data: {
+                usuario,
+                password
+            },
+            success: function(data) {
+                if (data == 1) {
+                    location.href = '/inicio';
+                } else if (data == 2) {
+                    swal("Alerta", "El usuario no existe en la base de datos.", "warning")
+                } else if (data == 3) {
+                    swal("Alerta", "Usuario o contraseña incorrecta.", "warning")
+                } else {
+                    alert('acá')
+                }
+            }
+        })
+    }
+</script>
