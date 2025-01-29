@@ -14,15 +14,10 @@
     <style>
         body {
             background-image: url('{{ asset('images/background/background-login.jpeg') }}');
-            background-size: contain; /* O usa 'contain' si prefieres que no se recorte */
+            background-size: cover; /* Cambiado a 'cover' para que la imagen ocupe toda la pantalla */
             background-position: center; /* Centra la imagen */
             background-repeat: no-repeat; /* Evita que la imagen se repita */
             background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
-            /* background: rgb(6, 16, 101) no-repeat; */
-            /* background: -moz-linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
-            background: -webkit-linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
-            background: linear-gradient(180deg, rgba(6, 16, 101, 1) 0%, rgba(255, 255, 255, 1) 80%) no-repeat;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#061065", endColorstr="#ffffff", GradientType=1); */
         }
         /* Pseudo-elemento para la superposición */
         body::before {
