@@ -82,7 +82,7 @@
             <h5 style="margin-right: 20px;">
                 <i class="fa-solid fa-circle-user" style="font-size: 64px;"></i>
             </h5>
-            <h5 style="font-weight: bold">USUARIO</h5>
+            <h5 style="font-weight: bold">{{ Auth::user()->nombre_completo }}</h5>
         </div>
         <h5 style="">Menú</h5>
         <ul>
