@@ -27,9 +27,11 @@ Route::middleware("auth")->group(function () {
         return view('auth.inicio');
     })->name('inicio');
 
+    // Rutas de pacientes
     Route::get('/pacientes', [App\Http\Controllers\PacienteController::class, 'pacientes'])->name('pacientes');
-
     Route::get('/registrarPacientes', [App\Http\Controllers\PacienteController::class, 'registrarPacientes'])->name('registrarPacientes');
     Route::post('/guardarRegistroPaciente', [App\Http\Controllers\PacienteController::class, 'guardarRegistroPaciente'])->name('guardarRegistroPaciente');
-
+    Route::post('/editarPaciente', [App\Http\Controllers\PacienteController::class, 'editarPaciente'])->name('editarPaciente');
+    Route::post('/editarDatosPaciente', [App\Http\Controllers\PacienteController::class, 'editarDatosPaciente'])->name('editarDatosPaciente');
+    Route::post('/eliminarPaciente', [App\Http\Controllers\PacienteController::class, 'eliminarPaciente'])->name('eliminarPaciente');
 });

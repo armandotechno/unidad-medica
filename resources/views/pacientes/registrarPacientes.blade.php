@@ -157,7 +157,7 @@
             <div class="form-row">
                 <div class="form-group">
                     <input type="text" class="form-control" id="nro_historia" name="nro_historia"
-                        placeholder="N° Historia clínica" required>
+                        placeholder="N° Historia clínica" maxlength="8" required>
                 </div>
 
                 <div class="form-group">
@@ -224,7 +224,7 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="observaciones">Observaciones</label>
+                    <label for="observaciones">Observaciones ( opcional )</label>
                     <textarea class="form-control" id="observaciones" name="observaciones" rows="3" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';"  placeholder="XXX......"></textarea>
                 </div>
             </div>
@@ -280,27 +280,40 @@
             formData.append('ubicacion_historia', ubicacion_historia);
             formData.append('observaciones', observaciones);
 
-            $.ajax({
-                type: 'POST',
-                url: "{{ url('guardarRegistroPaciente') }}",
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                },
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    if (data == 1) {
-                        swal("Éxito", "Paciente registrado correctamente.", "success").then(() => {
-                            window.location.href = '{{ url('pacientes') }}';
-                        });
+            swal({
+                title: 'Confirmación',
+                text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: 'success',
+                cancelButtonColor: 'danger',
+                cancelButtonText: 'No',
+                confirmButtonText: 'Sí'
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url('guardarRegistroPaciente') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if (data == 1) {
+                                swal("Éxito", "Paciente registrado correctamente.", "success").then(() => {
+                                    window.location.href = '{{ url('pacientes') }}';
+                                });
 
-                    } else {
-                        swal("Error", "Ocurrió un error al registrar el paciente.", "error");
-                    }
-                },
-                error: function(xhr, status, error) {
-                    swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                            } else {
+                                swal("Error", "Ocurrió un error al registrar el paciente.", "error");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                        }
+                    });
                 }
             });
         }

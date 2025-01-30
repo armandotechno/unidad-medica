@@ -46,8 +46,53 @@ class PacienteController extends Controller
         $paciente->goblocal_id = $datos['gobierno_local'];
         $paciente->direccion = $datos['direccion'];
         $paciente->ubihistoria = $datos['ubicacion_historia'];
+        $paciente->observaciones = $datos['observaciones'];
         $paciente->save();
 
         return 1;
+    }
+
+    public function editarPaciente(Request $request) {
+
+        $paciente_id = $request->paciente_id;
+        $paciente = Paciente::where("id", $paciente_id)->first();
+        $tiposDeSangre = TipoSangre::all();
+        $distritos = Distrito::all();
+        $departamentos = Departamento::all();
+        $provincias = Provincia::all();
+        $gobierno_local = Goblocal::all();
+
+        return view('modals.editarPaciente', compact('paciente_id', 'paciente', 'tiposDeSangre', 'distritos', 'departamentos', 'provincias', 'gobierno_local'));
+    }
+
+    public function editarDatosPaciente(Request $request) {
+
+        Paciente::where("id", $request->paciente_id)->update([
+            'nombre_completo' => $request->nombre,
+            'dni' => intval($request->dni),
+            'genero' => $request->genero,
+            'nrohistoria' => $request->nro_historia,
+            'fecha_nac' => $request->fecha_nacimiento,
+            'tiposangre_id' => $request->tipo_sangre,
+            'departamento_id' => $request->departamento,
+            'provincia_id' => $request->provincia,
+            'distrito_id' => $request->distrito,
+            'goblocal_id' => $request->gobierno_local,
+            'direccion' => $request->direccion,
+            'ubihistoria' => $request->ubicacion_historia,
+            'observaciones' => $request->observaciones,
+        ]);
+
+        return response()->json(1);
+
+    }
+
+    public function eliminarPaciente(Request $request) {
+
+        $paciente = Paciente::where('id', $request->paciente_id)->first();
+        $paciente->delete();
+
+        return response()->json(2);
+
     }
 }

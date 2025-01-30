@@ -86,7 +86,7 @@
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
                     <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
                             class="fa-solid fa-users"></i></h5>
-                    <a href="#" style="font-size: 24px; line-height: 34px;">Panel</a>
+                    <a href="{{ url('/inicio') }}" style="font-size: 24px; line-height: 34px;">Panel</a>
                 </div>
             </li>
             <li>
