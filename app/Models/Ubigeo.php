@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Perfil extends Model
+class Ubigeo extends Model
 {
-    protected $table = 'perfiles';
+    protected $table = 'ubigeo';
 }
