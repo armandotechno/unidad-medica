@@ -32,13 +32,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="text-align: left;">
-                        <td>1</td>
-                        <td>Prueba</td>
-                        <td>Masculino</td>
-                        <td>101</td>
-                        <td>Miranda</td>
-                    </tr>
+                    @foreach ($pacientes as $paciente)
+                        <tr style="text-align: left;">
+                            <td>{{ $paciente->id }}</td>
+                            <td>{{ $paciente->nombre_completo }}</td>
+                            <td>{{ $paciente->genero }}</td>
+                            <td>{{ $paciente->nrohistoria }}</td>
+                            <td>{{ $paciente->tipoSeguro }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

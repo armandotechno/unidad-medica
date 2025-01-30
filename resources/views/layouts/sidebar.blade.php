@@ -127,6 +127,8 @@
     <div class="content">
         @yield('body')
     </div>
+
+    @yield('javascripts')
 </body>
 
 </html>

@@ -30,5 +30,6 @@ Route::middleware("auth")->group(function () {
     Route::get('/pacientes', [App\Http\Controllers\PacienteController::class, 'pacientes'])->name('pacientes');
 
     Route::get('/registrarPacientes', [App\Http\Controllers\PacienteController::class, 'registrarPacientes'])->name('registrarPacientes');
+    Route::post('/guardarRegistroPaciente', [App\Http\Controllers\PacienteController::class, 'guardarRegistroPaciente'])->name('guardarRegistroPaciente');
 
 });
