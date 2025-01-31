@@ -73,7 +73,11 @@
 
 <body class="fix-header fix-sidebar card-no-border">
     <aside>
-        <h5 style="text-align: center; font-weight: bold">POSTA MÉDICA</h5>
+        <h5 style="text-align: center; font-weight: bold;">
+            <a href="{{ url('/inicio') }}" style="text-decoration: none; color: inherit;">
+                POSTA MÉDICA
+            </a>
+        </h5>
         <div style="display: flex; margin-top: 70px; align-items: center; padding: 10px;">
             <h5 style="margin-right: 20px;">
                 <i class="fa-solid fa-circle-user" style="font-size: 64px;"></i>
@@ -108,7 +112,7 @@
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
                     <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
                             class="fa-solid fa-file-lines"></i></h5>
-                    <a href="#" style="font-size: 24px; line-height: 34px;">Informes</a>
+                    <a href="{{ '/reportePacientes' }}" style="font-size: 24px; line-height: 34px;">Informes</a>
                 </div>
             </li>
             <li>

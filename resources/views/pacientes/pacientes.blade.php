@@ -27,6 +27,38 @@
             margin-left: 10px;
             flex: 1;
         }
+
+        /* Agregar líneas negras debajo de cada fila */
+        #pacientes tbody tr {
+            border-bottom: 2px solid #000000 !important;
+            /* Línea negra debajo de cada fila */
+        }
+
+        /* Aumentar la especificidad para las celdas */
+        #pacientes tbody td {
+            padding: 10px !important;
+            /* Ajusta el padding según sea necesario */
+        }
+
+        /* Aumentar la especificidad para la tabla */
+        #pacientes {
+            border-collapse: collapse !important;
+            /* Fusiona los bordes de las celdas */
+            width: 100% !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+
+        }
+
+        /* Aumentar la especificidad para el encabezado */
+        #pacientes thead th {
+            border-bottom: 2px solid #000000 !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            /* Línea negra debajo del encabezado */
+        }
     </style>
 @endsection
 @section('body')
@@ -65,13 +97,16 @@
                             <td>{{ $paciente->nrohistoria }}</td>
                             <td>XXX</td>
                             <td style="text-align: center; padding: 5px">
-                                <button style="border: none; background: none; padding: 0;" onclick="editarPaciente({{ $paciente->id }})" data-toggle="tooltip" data-placement="top" title="Editar Paciente" >
+                                <button style="border: none; background: none; padding: 0;"
+                                    onclick="editarPaciente({{ $paciente->id }})" data-toggle="tooltip" data-placement="top"
+                                    title="Editar Paciente">
                                     <i class="fa-solid fa-pen-to-square"
                                         style="color: rgb(33, 172, 33); font-size: 25px"></i>
                                 </button>
-                                <button style="border: none; background: none; padding: 0;" onclick="eliminarPaciente({{ $paciente->id }})" data-toggle="tooltip" data-placement="top" title="Eliminar Paciente">
-                                    <i class="fa-regular fa-trash-can"
-                                        style="color: red; font-size: 25px; "></i>
+                                <button style="border: none; background: none; padding: 0;"
+                                    onclick="eliminarPaciente({{ $paciente->id }})" data-toggle="tooltip"
+                                    data-placement="top" title="Eliminar Paciente">
+                                    <i class="fa-regular fa-trash-can" style="color: red; font-size: 25px; "></i>
                                 </button>
                             </td>
                         </tr>
@@ -89,7 +124,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-danger waves-effect text-left"
+                            data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
@@ -101,12 +137,11 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>
     <script src="{{ asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
-<script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('js/pacientes.js') }}"></script>
     <script>
         $(document).ready(function() {
             var table = $('#pacientes').DataTable({
@@ -152,7 +187,8 @@
                         });
 
                     // Agregar el ícono de lupa y el texto "Nombre:"
-                    $('.dataTables_filter label').html('Nombre: <i class="fas fa-search"></i>').append(searchInput);
+                    $('.dataTables_filter label').html('Nombre: <i class="fas fa-search"></i>').append(
+                        searchInput);
 
                     // Asegurar que el input de búsqueda siga funcionando
                     searchInput.on('keyup', function() {
@@ -162,7 +198,7 @@
             });
         });
 
-        $('#myModal').on('hidden.bs.modal', function () {
+        $('#myModal').on('hidden.bs.modal', function() {
             location.reload(); // Recarga la página cuando el modal se cierra
         });
 
@@ -176,7 +212,9 @@
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-                data: {paciente_id},
+                data: {
+                    paciente_id
+                },
                 success: function(data) {
                     $("#myModal").modal();
                     $("#myModal").modal("toggle");
@@ -190,7 +228,7 @@
 
         function eliminarPaciente(id) {
 
-        let paciente_id = id
+            let paciente_id = id
 
             swal({
                 title: 'Confirmación',
@@ -209,11 +247,13 @@
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
-                        data: {paciente_id},
+                        data: {
+                            paciente_id
+                        },
                         success: function(data) {
-                        if (data === 2) {
+                            if (data === 2) {
                                 swal('Proceso exitoso.', "", "success")
-                                    .then(function () {
+                                    .then(function() {
                                         location.reload();
                                     });
                             } else {
@@ -227,6 +267,5 @@
                 }
             });
         }
-
     </script>
 @endsection

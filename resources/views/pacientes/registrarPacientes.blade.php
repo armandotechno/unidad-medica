@@ -2,117 +2,7 @@
 @section('title', 'Registrar Pacientes')
 @section('stylesheets')
     @parent
-    <style>
-        .form-control,
-        .form-select {
-            border: none;
-            border-radius: 20px;
-            background-color: #ededf4;
-            padding: 15px 20px;
-            height: 50px;
-            width: 100%;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .form-control::placeholder,
-        .form-select::placeholder {
-            color: #333;
-            /* Cambia este valor al color que desees para el placeholder */
-        }
-
-        .form-select:focus {
-            outline: none;
-            box-shadow: none;
-            /* border-color: #0e0d0d; Asegúrate de que el borde coincida con el de los inputs */
-        }
-
-        .btn-primary {
-            border-radius: 20px;
-            /* Añadí bordes redondeados al botón */
-            padding: 15px 40px;
-            /* Aumenté el padding del botón */
-            background-color: #040404;
-            border: none;
-            outline: none;
-            font-size: 18px;
-            /* Aumenté el tamaño de la fuente del botón */
-        }
-
-        .btn-primary:focus {
-            outline: none;
-            box-shadow: none;
-        }
-
-        .centered-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .form-row {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1200px;
-            flex-wrap: wrap;
-            /* gap: 10px; Aumenté el espacio entre los elementos */
-            margin-bottom: 20px;
-            /* Añadí margen inferior para separar las filas */
-        }
-
-        .form-group {
-            width: calc(50% - 10px);
-            /* Ajusté el ancho para que quepan dos en una fila */
-            text-align: left;
-            /* Cambié a alineación izquierda para mejor legibilidad */
-        }
-
-        .form-group textarea {
-            width: 240px;
-            border-radius: 0;
-            height: 60px;
-            border: 1px solid #0e0d0d;
-        }
-
-        /* Estilos para pantallas pequeñas */
-        @media (max-width: 768px) {
-            .form-group {
-                width: 100%;
-                /* En pantallas pequeñas, cada grupo ocupa el 100% del ancho */
-            }
-
-            .form-control {
-                width: 100%;
-            }
-
-            .form-row {
-                flex-direction: column;
-            }
-
-            .centered-form {
-                padding: 0 10px;
-            }
-        }
-
-        /* Centrar el botón de "Registrar" */
-        .form-group.text-center {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 20px;
-            /* Añadí margen superior para separar el botón */
-        }
-
-        h3 {
-            text-align: center;
-            font-weight: bold;
-            font-size: 40px;
-            margin-bottom: 30px;
-            /* Añadí margen inferior para separar el título */
-        }
-    </style>
+        <link rel="stylesheet" href="{{ asset('css/registrarPaciente.css') }}">
 @endsection
 @section('body')
 
@@ -141,8 +31,8 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
-                        max="{{ date('Y-m-d') }}" required>
+                    <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
+                        placeholder="Fecha de Nacimiento" onfocus="(this.type='date')" max="{{ date('Y-m-d') }}" required>
                 </div>
 
                 <div class="form-group">
@@ -225,14 +115,22 @@
             <div class="form-row">
                 <div class="form-group">
                     <label for="observaciones">Observaciones ( opcional )</label>
-                    <textarea class="form-control" id="observaciones" name="observaciones" rows="3" oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';"  placeholder="XXX......"></textarea>
+                    <textarea class="form-control" id="observaciones" name="observaciones" rows="3"
+                        oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';" placeholder="XXX......"></textarea>
                 </div>
             </div>
 
             <div class="form-group text-center">
                 <button onclick="registrarPaciente()" type="button" class="btn btn-primary">
-                    Registrar
+                    REGISTRAR
                 </button>
+            </div>
+
+            <div class="form-group text-center">
+                <a href="{{ '/pacientes' }}"
+                    style="color: #040404; font-size: 18px; font-weight: bold;text-decoration: none; border-bottom: 2px solid black;">
+                    CANCELAR
+                </a>
             </div>
         </form>
     </div>
@@ -302,9 +200,10 @@
                         contentType: false,
                         success: function(data) {
                             if (data == 1) {
-                                swal("Éxito", "Paciente registrado correctamente.", "success").then(() => {
-                                    window.location.href = '{{ url('pacientes') }}';
-                                });
+                                swal("Éxito", "Paciente registrado correctamente.", "success").then(
+                                () => {
+                                        window.location.href = '{{ url('pacientes') }}';
+                                    });
 
                             } else {
                                 swal("Error", "Ocurrió un error al registrar el paciente.", "error");

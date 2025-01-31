@@ -34,4 +34,7 @@ Route::middleware("auth")->group(function () {
     Route::post('/editarPaciente', [App\Http\Controllers\PacienteController::class, 'editarPaciente'])->name('editarPaciente');
     Route::post('/editarDatosPaciente', [App\Http\Controllers\PacienteController::class, 'editarDatosPaciente'])->name('editarDatosPaciente');
     Route::post('/eliminarPaciente', [App\Http\Controllers\PacienteController::class, 'eliminarPaciente'])->name('eliminarPaciente');
+
+    //Rutas de reportes de pacientes
+    Route::get('/reportePacientes', [App\Http\Controllers\ReportePacienteController::class, 'reportePacientes'])->name('reportePacientes');
 });
