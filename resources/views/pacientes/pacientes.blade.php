@@ -59,6 +59,18 @@
             border-right: none !important;
             /* Línea negra debajo del encabezado */
         }
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            background-color: #040404;
+            border: none;
+        }
+        .page-item .page-link {
+            z-index: 1;
+            color: #040404;
+            background-color: #fff;
+            border: none;
+        }
     </style>
 @endsection
 @section('body')
