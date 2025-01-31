@@ -2,50 +2,7 @@
 @section('title', 'Reportes')
 @section('stylesheets')
     @parent
-    <style>
-        h3 {
-            text-align: center;
-            font-weight: bold;
-            font-size: 40px;
-            margin-bottom: 30px;
-        }
-
-        .centered-form {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-select {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .btn-primary {
-            padding: 15px 20px;
-            background-color: #040404;
-            border: none;
-            outline: none;
-            font-size: 18px;
-        }
-
-        .btn-primary:hover {
-            background-color: #333333;
-            /* Un color más claro que el original (#040404) */
-        }
-
-        .btn-primary:focus {
-            outline: none;
-            box-shadow: none;
-        }
-    </style>
+        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 @endsection
 @section('body')
 

@@ -37,4 +37,8 @@ Route::middleware("auth")->group(function () {
 
     //Rutas de reportes de pacientes
     Route::get('/reportePacientes', [App\Http\Controllers\ReportePacienteController::class, 'reportePacientes'])->name('reportePacientes');
+
+    // Rutas de historial médico
+    Route::get('/historialMedico', [App\Http\Controllers\HistorialMedicoController::class, 'historialMedico'])->name('historialMedico');
+
 });

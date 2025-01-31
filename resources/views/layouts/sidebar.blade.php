@@ -105,7 +105,7 @@
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
                     <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
                             class="fa-solid fa-book-medical"></i></h5>
-                    <a href="#" style="font-size: 24px; line-height: 34px;">Historial médico</a>
+                    <a href="{{ url('/historialMedico') }}" style="font-size: 24px; line-height: 34px;">Historial médico</a>
                 </div>
             </li>
             <li>
