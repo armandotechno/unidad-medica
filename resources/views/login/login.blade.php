@@ -2,8 +2,9 @@
 @section('title', 'Login')
 @section('content')
 @section('stylesheets')
-    <link rel="stylesheet" href="{{ asset('fontawesome-free-6.5.1-web/css/all.min.css') }}">
     @parent
+    <link rel="stylesheet" href="{{ asset('fontawesome-free-6.5.1-web/css/all.min.css') }}">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 
     <style>
         /* Cambia el color de fondo del input */
