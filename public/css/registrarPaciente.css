@@ -51,7 +51,7 @@
     max-width: 1200px;
     flex-wrap: wrap;
     /* gap: 10px; Aumenté el espacio entre los elementos */
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     /* Añadí margen inferior para separar las filas */
 }
 
