@@ -107,7 +107,7 @@
                 } else if (data == 3) {
                     swal("Alerta", "Usuario o contraseña incorrecta.", "warning")
                 } else {
-                    alert('acá')
+                    swal("Error", "Ocurrió un error al intentar iniciar sesión.", "error")
                 }
             }
         })
