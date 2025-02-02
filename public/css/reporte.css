@@ -1,0 +1,142 @@
+h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.centered-form {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group.text-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-primary {
+    padding: 10px 15px; /* Reduje el padding (antes era 15px 20px) */
+    background-color: #040404;
+    border: none;
+    outline: none;
+    font-size: 16px; /* Reduje el tamaño de la fuente (antes era 18px) */
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #333333;
+}
+
+.btn-primary:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.form-control,
+.form-select {
+    border: 1px solid;
+    /* border-radius: 20px; */
+    background-color: #ededf4;
+    padding: 15px 20px;
+    height: 50px;
+    width: 300px;
+    font-size: 16px;
+    color: #333;
+}
+
+.form-control::placeholder,
+.form-select::placeholder {
+    color: #333;
+    /* Cambia este valor al color que desees para el placeholder */
+}
+
+.form-select:focus {
+    outline: none;
+    box-shadow: none;
+    /* border-color: #0e0d0d; Asegúrate de que el borde coincida con el de los inputs */
+}
+
+.centered-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    /* gap: 10px; Aumenté el espacio entre los elementos */
+    margin-bottom: 5px;
+    /* Añadí margen inferior para separar las filas */
+}
+
+.form-group {
+    width: calc(50% - 10px);
+    /* Ajusté el ancho para que quepan dos en una fila */
+    text-align: left;
+    /* Cambié a alineación izquierda para mejor legibilidad */
+}
+
+.form-group textarea {
+    width: 260px;
+    border-radius: 0;
+    height: 60px;
+    border: 1px solid #0e0d0d;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+    .form-group {
+        width: 100%;
+        /* En pantallas pequeñas, cada grupo ocupa el 100% del ancho */
+    }
+
+    .form-control {
+        width: 100%;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .centered-form {
+        padding: 0 10px;
+    }
+}
+
+/* Centrar el botón de "Registrar" */
+.form-group.text-center {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+    /* Añadí margen superior para separar el botón */
+}
+
+h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 40px;
+    margin-bottom: 30px;
+}

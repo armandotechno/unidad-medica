@@ -2,7 +2,7 @@
 @section('title', 'Reportes')
 @section('stylesheets')
     @parent
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/reporte.css') }}">
 @endsection
 @section('body')
 

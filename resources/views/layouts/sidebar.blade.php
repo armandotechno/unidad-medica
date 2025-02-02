@@ -11,63 +11,7 @@
         <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('plugins/sweetalert/sweetalert.css') }}">
         <link rel="stylesheet" href="{{ asset('fontawesome-free-6.5.1-web/css/all.min.css') }}">
-        <style>
-            body {
-                display: flex;
-                margin: 0;
-                height: 100vh;
-                /* Asegúrate de que el body ocupe toda la altura de la ventana */
-            }
-
-            aside {
-                background-color: #1b2742;
-                color: white;
-                width: 350px;
-                padding: 20px;
-                height: 100%;
-                /* Asegúrate de que el sidebar ocupe toda la altura */
-                overflow-y: auto;
-                /* Permite el desplazamiento si el contenido es más alto que la ventana */
-            }
-
-            .content {
-                flex: 1;
-                /* Ocupa el resto del espacio disponible */
-                padding: 20px;
-                background-color: #f8f9fa;
-                overflow-y: auto;
-                /* Permite el desplazamiento si el contenido es más alto que la ventana */
-            }
-
-            aside h4 {
-                margin-bottom: 20px;
-                /* Espaciado inferior para el título */
-            }
-
-            aside ul {
-                list-style-type: none;
-                /* Sin viñetas */
-                padding: 0;
-                /* Sin padding */
-            }
-
-            aside ul li {
-                margin: 10px 0;
-                /* Espaciado entre los elementos de la lista */
-            }
-
-            aside ul li a {
-                color: white;
-                /* Color de los enlaces */
-                text-decoration: none;
-                /* Sin subrayado */
-            }
-
-            aside ul li a:hover {
-                text-decoration: underline;
-                /* Subrayar al pasar el mouse */
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     @show
 </head>
 
@@ -88,6 +32,31 @@
         <ul>
             <li>
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
+                    <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </h5>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"
+                        style="font-size: 24px; line-height: 34px;">Administración</a>
+                </div>
+                <!-- Submenú de Administración -->
+                <ul aria-expanded="false" class="collapse">
+                    <li>
+                        <a href="{{ url('/usuarios') }}" style="font-size: 24px; line-height: 34px;">
+                            <i class="fa-solid fa-users" style="margin-right: 10px;"></i> <!-- Ícono para Usuarios -->
+                            Usuarios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/doctores') }}" style="font-size: 24px; line-height: 34px;">
+                            <i class="fa-solid fa-user-doctor" style="margin-right: 10px;"></i>
+                            <!-- Ícono para Doctores -->
+                            Doctores
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
                     <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
                             class="fa-solid fa-users"></i></h5>
                     <a href="{{ url('/inicio') }}" style="font-size: 24px; line-height: 34px;">Panel</a>
@@ -105,7 +74,8 @@
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
                     <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
                             class="fa-solid fa-book-medical"></i></h5>
-                    <a href="{{ url('/historialMedico') }}" style="font-size: 24px; line-height: 34px;">Historial médico</a>
+                    <a href="{{ url('/historialMedico') }}" style="font-size: 24px; line-height: 34px;">Historial
+                        médico</a>
                 </div>
             </li>
             <li>
@@ -137,3 +107,30 @@
 </body>
 
 </html>
+
+<script>
+    // Selecciona todos los elementos con la clase "has-arrow"
+    const menuItems = document.querySelectorAll('.has-arrow');
+
+    // Añade un evento de clic a cada elemento
+    menuItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault(); // Evita el comportamiento predeterminado del enlace
+
+            // Encuentra el submenú asociado
+            const submenu = this.closest('li').querySelector('ul');
+
+            // Verifica si el submenú existe
+            if (submenu) {
+                // Alterna la clase "collapse" para mostrar/ocultar el submenú
+                if (submenu.classList.contains('collapse')) {
+                    submenu.classList.remove('collapse');
+                    submenu.setAttribute('aria-expanded', 'true');
+                } else {
+                    submenu.classList.add('collapse');
+                    submenu.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+    });
+</script>

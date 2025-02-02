@@ -3,7 +3,6 @@
 @section('stylesheets')
     @parent
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/registrarPaciente.css') }}"> --}}
 @endsection
 @section('body')
     <div class="row page-titles">

@@ -1,0 +1,91 @@
+body {
+    display: flex;
+    margin: 0;
+    height: 100vh;
+    /* Asegúrate de que el body ocupe toda la altura de la ventana */
+}
+
+aside {
+    background-color: #1b2742;
+    color: white;
+    width: 350px;
+    padding: 20px;
+    height: 100%;
+    /* Asegúrate de que el sidebar ocupe toda la altura */
+    overflow-y: auto;
+    /* Permite el desplazamiento si el contenido es más alto que la ventana */
+}
+
+.content {
+    flex: 1;
+    /* Ocupa el resto del espacio disponible */
+    padding: 20px;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    /* Permite el desplazamiento si el contenido es más alto que la ventana */
+}
+
+aside h4 {
+    margin-bottom: 20px;
+    /* Espaciado inferior para el título */
+}
+
+aside ul {
+    list-style-type: none;
+    /* Sin viñetas */
+    padding: 0;
+    /* Sin padding */
+}
+
+aside ul li {
+    margin: 10px 0;
+    /* Espaciado entre los elementos de la lista */
+}
+
+aside ul li a {
+    color: white;
+    /* Color de los enlaces */
+    text-decoration: none;
+    /* Sin subrayado */
+}
+
+aside ul li a:hover {
+    text-decoration: underline;
+    /* Subrayar al pasar el mouse */
+}
+
+/* Estilos para los submenús */
+.collapse {
+    display: none;
+    /* Oculta los submenús por defecto */
+}
+
+.collapse[aria-expanded="true"] {
+    display: block;
+    /* Muestra los submenús cuando están expandidos */
+}
+
+/* Estilos para los enlaces */
+.has-arrow {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+}
+
+.has-arrow:hover {
+    background-color: #2c3e50;
+    /* Cambia el color de fondo al pasar el mouse */
+}
+
+.hide-menu {
+    margin-left: 10px;
+    /* Espaciado entre el ícono y el texto */
+}
+
+/* Estilos para los submenús anidados */
+ul ul {
+    padding-left: 20px;
+    /* Indentación para los submenús anidados */
+}
