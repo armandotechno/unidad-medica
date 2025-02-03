@@ -111,9 +111,8 @@
                 <div class="form-group">
                     <select class="form-select" name="tipo_seguro" id="tipo_seguro" required>
                         <option value="">Tipo de seguro</option>
-                        <option value="1">Seguro 1</option>
-                        <option value="2">Seguro 2</option>
-                        <option value="3">Seguro 3</option>
+                        <option value="1">Particular</option>
+                        <option value="2">CIS</option>
                     </select>
                 </div>
             </div>

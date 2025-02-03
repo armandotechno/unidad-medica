@@ -27,7 +27,7 @@ class LoginController extends Controller
                 return response()->json(3); // Incorrect password
             }
         } else {
-            return 2;
+            return response()->json(2);
         }
     }
 }
