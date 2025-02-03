@@ -59,6 +59,9 @@
             border-right: none !important;
             /* Línea negra debajo del encabezado */
         }
+        #pacientes tbody tr td {
+            border-bottom: 2px solid #000000 !important; /* Línea negra debajo de cada celda */
+        }
         .page-item.active .page-link {
             z-index: 1;
             color: #fff;

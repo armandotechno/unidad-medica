@@ -2,6 +2,7 @@
 @section('title', 'Usuarios')
 @section('stylesheets')
     @parent
+    <link rel="stylesheet" href="{{ asset('plugins/datatables/media/css/dataTables.bootstrap4.css') }}">
     <style>
         .btn-primary {
             background-color: #040404;
@@ -9,6 +10,9 @@
             outline: none;
         }
 
+        .table-responsive {
+            overflow-x: hidden; /* Permite el desplazamiento horizontal */
+        }
         .dataTables_filter {
             display: flex;
             align-items: center;
@@ -24,34 +28,21 @@
             margin-left: 10px;
             flex: 1;
         }
-        .table-responsive {
-    overflow-x: auto; /* Permite scroll horizontal si es necesario */
-    width: 100%; /* Asegura que el contenedor ocupe el 100% del ancho disponible */
-}
-
-#pacientes {
-    width: 100% !important; /* Asegura que la tabla ocupe el 100% del contenedor */
-}
-
-#pacientes th,
-#pacientes td {
-    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
-}
 
         /* Agregar líneas negras debajo de cada fila */
-        #pacientes tbody tr {
+        #usuarios tbody tr {
             border-bottom: 2px solid #000000 !important;
             /* Línea negra debajo de cada fila */
         }
 
         /* Aumentar la especificidad para las celdas */
-        #pacientes tbody td {
+        #usuarios tbody td {
             padding: 10px !important;
             /* Ajusta el padding según sea necesario */
         }
 
         /* Aumentar la especificidad para la tabla */
-        #pacientes {
+        #usuarios {
             border-collapse: collapse !important;
             /* Fusiona los bordes de las celdas */
             width: 100% !important;
@@ -62,7 +53,7 @@
         }
 
         /* Aumentar la especificidad para el encabezado */
-        #pacientes thead th {
+        #usuarios thead th {
             border-bottom: 2px solid #000000 !important;
             border-top: none !important;
             border-left: none !important;
@@ -70,13 +61,15 @@
             /* Línea negra debajo del encabezado */
         }
 
+        #usuarios tbody tr td {
+            border-bottom: 2px solid #000000 !important; /* Línea negra debajo de cada celda */
+        }
         .page-item.active .page-link {
             z-index: 1;
             color: #fff;
             background-color: #040404;
             border: none;
         }
-
         .page-item .page-link {
             z-index: 1;
             color: #040404;
@@ -100,7 +93,7 @@
             </div>
         </div>
         <div class="table-responsive m-t-40">
-            <table id="pacientes" class="display nowrap table table-hover table-striped table-bordered">
+            <table id="usuarios" class="display nowrap table table-hover table-striped table-bordered">
                 <thead>
                     <tr style="text-align: center;">
                         <th>Nombre</th>
@@ -161,7 +154,7 @@
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.print.min.js') }}"></script>
     <script>
         $(document).ready(function() {
-            var table = $('#pacientes').DataTable({
+            var table = $('#usuarios').DataTable({
                 dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
                 buttons: [
                     // Aquí puedes agregar botones si los necesitas

@@ -76,13 +76,37 @@
             const password = document.getElementById('password').value;
 
             if (nombre === '' || dni === '' || usuario === '' || password === '') {
-                swal("Alerta", "Todos los campos son obligatorios.", "warning");
+                Swal.fire({
+                    type: 'warning',
+                    title: 'Todos los campos son obligatorios.',
+                    confirmButtonText: 'Aceptar',
+                    position: 'center',
+                    backdrop: false
+                });
             } else if (dni.length < 8) {
-                swal("Alerta", "El DNI debe tener 8 dígitos.", "warning");
+                Swal.fire({
+                    type: 'warning',
+                    title: 'El DNI debe tener 8 dígitos.',
+                    confirmButtonText: 'Aceptar',
+                    position: 'center',
+                    backdrop: false
+                });
             } else if (password.length < 8) {
-                swal("Alerta", "La contraseña debe tener al menos 8 caracteres.", "warning");
+                Swal.fire({
+                    type: 'warning',
+                    title: 'La contraseña debe tener mínimo 8 caracteres.',
+                    confirmButtonText: 'Aceptar',
+                    position: 'center',
+                    backdrop: false
+                });
             } else if (usuario.length < 6) {
-                swal("Alerta", "El nombre de usuario debe tener al menos 6 caracteres.", "warning");
+                Swal.fire({
+                    type: 'warning',
+                    title: 'El nombre de usuario debe tener al menos 6 caracteres.',
+                    confirmButtonText: 'Aceptar',
+                    position: 'center',
+                    backdrop: false
+                });
             } else {
 
                 let formData = new FormData();
