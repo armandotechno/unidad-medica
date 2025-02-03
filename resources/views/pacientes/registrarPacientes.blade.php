@@ -19,13 +19,13 @@
             <div class="form-row">
                 <div class="form-group">
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo"
-                        oninput="this.value = this.value = input.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');"
+                        oninput="this.value = this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');"
                         maxlength="32" required>
                 </div>
 
                 <div class="form-group">
                     <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI:"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="12" required>
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="8" required>
                 </div>
             </div>
 
@@ -142,6 +142,10 @@
     <script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
 
     <script>
+        Swal.setDefaults({
+            backdrop: false // Desactiva el backdrop por defecto
+        });
+
         function registrarPaciente() {
             let nombre = document.getElementById('nombre').value;
             let dni = document.getElementById('dni').value;
@@ -159,7 +163,7 @@
 
             if (nombre === '' || dni === '' || fecha_nacimiento === '' || genero === '' || nro_historia === '' ||
                 tipo_sangre === '' || distrito === '' || departamento === '' || provincia === '' || direccion === '') {
-                swal("Alerta", "Todos los campos son obligatorios", "warning");
+                Swal.fire("Alerta", "Todos los campos son obligatorios", "warning");
                 return;
             }
 
@@ -178,7 +182,7 @@
             formData.append('ubicacion_historia', ubicacion_historia);
             formData.append('observaciones', observaciones);
 
-            swal({
+            Swal.fire({
                 title: 'Confirmación',
                 text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
                 type: 'question',
@@ -200,17 +204,17 @@
                         contentType: false,
                         success: function(data) {
                             if (data == 1) {
-                                swal("Éxito", "Paciente registrado correctamente.", "success").then(
+                                Swal.fire("Éxito", "Paciente registrado correctamente.", "success").then(
                                 () => {
                                         window.location.href = '{{ url('pacientes') }}';
                                     });
 
                             } else {
-                                swal("Error", "Ocurrió un error al registrar el paciente.", "error");
+                                Swal.fire("Error", "Ocurrió un error al registrar el paciente.", "error");
                             }
                         },
                         error: function(xhr, status, error) {
-                            swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                            Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
                         }
                     });
                 }

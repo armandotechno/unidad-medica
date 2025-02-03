@@ -158,6 +158,10 @@
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.print.min.js') }}"></script>
     <script>
+        Swal.setDefaults({
+            backdrop: false // Desactiva el backdrop por defecto
+        });
+
         $(document).ready(function() {
             var table = $('#pacientes').DataTable({
                 dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
@@ -236,7 +240,7 @@
                     $("#m-content").html(data);
                 },
                 error: function(xhr, status, error) {
-                    // swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                    Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
                 }
             });
         }
@@ -245,7 +249,7 @@
 
             let paciente_id = id
 
-            swal({
+            Swal.fire({
                 title: 'Confirmación',
                 text: "¿Está seguro de eliminar a este paciente?",
                 type: 'question',
@@ -267,16 +271,16 @@
                         },
                         success: function(data) {
                             if (data === 2) {
-                                swal('Proceso exitoso.', "", "success")
+                                Swal.fire('Proceso exitoso.', "", "success")
                                     .then(function() {
                                         location.reload();
                                     });
                             } else {
-                                swal("Ha ocurrido un problema.", "", "error");
+                                Swal.fire("Ha ocurrido un problema.", "", "error");
                             }
                         },
                         error: function(xhr, status, error) {
-                            // swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                            Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
                         }
                     });
                 }

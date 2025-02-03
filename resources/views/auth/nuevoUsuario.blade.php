@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label for="nombre">Nombre Completo</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo"
-                        oninput="this.value = this.value = input.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');"
+                        oninput="this.value = this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');"
                         maxlength="32" required>
                 </div>
 
@@ -69,6 +69,10 @@
     <script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
 
     <script>
+        Swal.setDefaults({
+            backdrop: false // Desactiva el backdrop por defecto
+        });
+
         const crearUsuario = () => {
             const nombre = document.getElementById('nombre').value;
             const dni = document.getElementById('dni').value;
@@ -115,17 +119,18 @@
                 formData.append('usuario', usuario);
                 formData.append('password', password);
 
-                swal({
+                Swal.fire({
+                    type: 'question',
                     title: 'Confirmación',
                     text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
-                    type: 'question',
                     showCancelButton: true,
                     confirmButtonColor: 'success',
                     cancelButtonColor: 'danger',
                     cancelButtonText: 'No',
-                    confirmButtonText: 'Sí'
-                }).then(function(result) {
-                    if (result.value) {
+                    confirmButtonText: 'Sí',
+                    backdrop: false
+                }).then((result) => {
+                    if (result.value) { // Cambiar result.value por result.isConfirmed
                         $.ajax({
                             type: 'POST',
                             url: "{{ url('crearUsuario') }}",
@@ -137,18 +142,20 @@
                             contentType: false,
                             success: function(data) {
                                 if (data == 1) {
-                                    swal("Éxito", "Usuario creado exitosamente.", "success").then(
-                                        () => {
-                                            window.location.href = '{{ url('usuarios') }}';
-                                        });
+                                    Swal.fire("Éxito", "Usuario creado exitosamente.", "success")
+                                        .then(
+                                            () => {
+                                                window.location.href = '{{ url('usuarios') }}';
+                                            });
 
                                 } else {
-                                    swal("Error", "Ocurrió un error al crear el usuario.", "error");
+                                    Swal.fire("Error", "Ocurrió un error al crear el usuario.",
+                                        "error");
                                 }
                             },
                             error: function(xhr, status, error) {
-                                swal("Error", "Ocurrió un error en la solicitud: " + error,
-                                "error");
+                                Swal.fire("Error", "Ocurrió un error en la solicitud: " + error,
+                                    "error");
                             }
                         });
                     }

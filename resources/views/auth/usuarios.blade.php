@@ -153,6 +153,10 @@
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.print.min.js') }}"></script>
     <script>
+        Swal.setDefaults({
+            backdrop: false // Desactiva el backdrop por defecto
+        });
+
         $(document).ready(function() {
             var table = $('#usuarios').DataTable({
                 dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
@@ -215,7 +219,7 @@
         function editarUsuario(id) {
 
             let usuario_id = id
-            alert(usuario_id)
+
             $.ajax({
                 type: 'POST',
                 url: "{{ url('editarUsuario') }}",
@@ -231,7 +235,7 @@
                     $("#m-content").html(data);
                 },
                 error: function(xhr, status, error) {
-                    // swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                    Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
                 }
             });
         }
@@ -271,7 +275,7 @@
                             }
                         },
                         error: function(xhr, status, error) {
-                            // swal("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                            Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
                         }
                     });
                 }
