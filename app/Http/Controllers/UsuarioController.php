@@ -40,6 +40,17 @@ class UsuarioController extends Controller
         return view('modals.editarUsuario', compact('usuario'));
     }
 
+    public function editarDatosUsuario(Request $request) {
+
+        Usuario::where('id', $request->usuario_id)->update([
+            'nombre_completo' => $request->nombre,
+            'dni' => $request->dni,
+            'usuario' => $request->usuario,
+        ]);
+
+        return response()->json(1);
+    }
+
     public function eliminarUsuario(Request $request)
     {
         $usuario = Usuario::find($request->usuario_id);

@@ -39,13 +39,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña"
                         required>
                 </div>
             </div>
 
+            <div class="form-row">
 
+                <div class="form-group">
+                    <label for="password2">Repita su Contraseña</label>
+                    <input type="password" class="form-control" id="password2" name="password2" placeholder="Repita su Contraseña"
+                        required>
+                </div>
+            </div>
 
             <div class="form-group text-center">
                 <button onclick="crearUsuario()" type="button" class="btn btn-primary">
@@ -78,8 +85,9 @@
             const dni = document.getElementById('dni').value;
             const usuario = document.getElementById('usuario').value;
             const password = document.getElementById('password').value;
+            const password2 = document.getElementById('password2').value;
 
-            if (nombre === '' || dni === '' || usuario === '' || password === '') {
+            if (nombre === '' || dni === '' || usuario === '' || password === '' || password2 === '') {
                 Swal.fire({
                     type: 'warning',
                     title: 'Todos los campos son obligatorios.',
@@ -111,6 +119,13 @@
                     position: 'center',
                     backdrop: false
                 });
+            } else if ( password !== password2 ) {
+                Swal.fire({
+                    type: 'warning',
+                    title: 'Las contraseñas deben ser iguales.',
+                    confirmButtonText: 'Aceptar',
+                    position: 'center',
+                })
             } else {
 
                 let formData = new FormData();
