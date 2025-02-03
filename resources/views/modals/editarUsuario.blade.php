@@ -96,7 +96,7 @@
                             contentType: false,
                             success: function(data) {
                                 if (data == 1) {
-                                    Swal.fire("Éxito", "Usuario registrado correctamente.", "success")
+                                    Swal.fire("Éxito", "Usuario editado correctamente.", "success")
                                         .then(
                                             () => {
                                                 window.location.href = '{{ url('usuarios') }}';

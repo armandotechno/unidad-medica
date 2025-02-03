@@ -212,7 +212,7 @@
                             contentType: false,
                             success: function(data) {
                                 if (data == 1) {
-                                    Swal.fire("Éxito", "Paciente registrado correctamente.", "success").then(
+                                    Swal.fire("Éxito", "Paciente editado correctamente.", "success").then(
                                     () => {
                                             window.location.href = '{{ url('pacientes') }}';
                                         });
