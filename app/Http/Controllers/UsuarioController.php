@@ -22,6 +22,18 @@ class UsuarioController extends Controller
 
     public function crearUsuario(Request $request)
     {
+
+        $usuarioExistente = Usuario::where('usuario', $request->usuario)->first();
+        $dniExistente = Usuario::where('dni', $request->dni)->first();
+
+        if ($usuarioExistente) {
+            return 2;
+        }
+
+        if ($dniExistente) {
+            return 3;
+        }
+
         $usuario = new Usuario();
         $usuario->nombre_completo = $request->nombre;
         $usuario->usuario = $request->usuario;

@@ -163,6 +163,10 @@
                                                 window.location.href = '{{ url('usuarios') }}';
                                             });
 
+                                } else if ( data == 2) {
+                                    Swal.fire("Alerta", "El nombre de usuario ya está registrado.", "warning")
+                                } else if ( data == 3) {
+                                    Swal.fire("Alerta", "El DNI ya está registrado.", "warning")
                                 } else {
                                     Swal.fire("Error", "Ocurrió un error al crear el usuario.",
                                         "error");

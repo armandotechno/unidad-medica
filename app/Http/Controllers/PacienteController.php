@@ -31,7 +31,15 @@ class PacienteController extends Controller
     }
 
     public function guardarRegistroPaciente(Request $request) {
-        // dd($request->all());
+
+        $pacienteExistente = Paciente::where('dni', $request->dni)
+            ->orWhere('nrohistoria', $request->nro_historia)
+            ->first();
+
+        if ($pacienteExistente) {
+            return 2;
+        }
+
         $datos = $request->all();
         $paciente = new Paciente();
         $paciente->nombre_completo = $datos['nombre'];

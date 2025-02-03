@@ -209,6 +209,8 @@
                                         window.location.href = '{{ url('pacientes') }}';
                                     });
 
+                            } else if ( data == 2) {
+                                    Swal.fire("Alerta", "El DNI o el número de historia clínica ya están registrados.", "warning")
                             } else {
                                 Swal.fire("Error", "Ocurrió un error al registrar el paciente.", "error");
                             }
