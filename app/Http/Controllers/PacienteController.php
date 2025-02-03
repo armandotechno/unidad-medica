@@ -25,9 +25,8 @@ class PacienteController extends Controller
         $distritos = Distrito::all();
         $departamentos = Departamento::all();
         $provincias = Provincia::all();
-        $gobierno_local = Goblocal::all();
 
-        return view('pacientes.registrarPacientes', compact('tiposDeSangre', 'distritos', 'departamentos', 'provincias', 'gobierno_local'));
+        return view('pacientes.registrarPacientes', compact('tiposDeSangre', 'distritos', 'departamentos', 'provincias'));
     }
 
     public function guardarRegistroPaciente(Request $request) {
@@ -51,7 +50,6 @@ class PacienteController extends Controller
         $paciente->departamento_id = $datos['departamento'];
         $paciente->provincia_id = $datos['provincia'];
         $paciente->distrito_id = $datos['distrito'];
-        $paciente->goblocal_id = $datos['gobierno_local'];
         $paciente->direccion = $datos['direccion'];
         $paciente->ubihistoria = $datos['ubicacion_historia'];
         $paciente->observaciones = $datos['observaciones'];
@@ -68,9 +66,8 @@ class PacienteController extends Controller
         $distritos = Distrito::all();
         $departamentos = Departamento::all();
         $provincias = Provincia::all();
-        $gobierno_local = Goblocal::all();
 
-        return view('modals.editarPaciente', compact('paciente_id', 'paciente', 'tiposDeSangre', 'distritos', 'departamentos', 'provincias', 'gobierno_local'));
+        return view('modals.editarPaciente', compact('paciente_id', 'paciente', 'tiposDeSangre', 'distritos', 'departamentos', 'provincias'));
     }
 
     public function editarDatosPaciente(Request $request) {

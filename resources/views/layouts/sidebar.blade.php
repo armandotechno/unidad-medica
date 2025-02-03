@@ -18,9 +18,7 @@
 <body class="fix-header fix-sidebar card-no-border">
     <aside>
         <h5 style="text-align: center; font-weight: bold;">
-            <a href="{{ url('/inicio') }}" style="text-decoration: none; color: inherit;">
-                POSTA MÉDICA
-            </a>
+            POSTA MÉDICA
         </h5>
         <div style="display: flex; margin-top: 70px; align-items: center; padding: 10px;">
             <h5 style="margin-right: 20px;">
@@ -30,6 +28,13 @@
         </div>
         <h5 style="">Menú</h5>
         <ul>
+            <li>
+                <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
+                    <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
+                            class="fa-solid fa-users"></i></h5>
+                    <a href="{{ url('/inicio') }}" style="font-size: 24px; line-height: 34px;">Inicio</a>
+                </div>
+            </li>
             <li>
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
                     <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;">
@@ -54,13 +59,6 @@
                         </a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
-                    <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
-                            class="fa-solid fa-users"></i></h5>
-                    <a href="{{ url('/inicio') }}" style="font-size: 24px; line-height: 34px;">Panel</a>
-                </div>
             </li>
             <li>
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">

@@ -99,7 +99,6 @@
                         <th>Nombre</th>
                         <th>Sexo</th>
                         <th>N°Historia Clínica</th>
-                        <th>Tipo de seguro</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -110,7 +109,6 @@
                             <td>{{ $paciente->nombre_completo }}</td>
                             <td>{{ $paciente->genero }}</td>
                             <td>{{ $paciente->nrohistoria }}</td>
-                            <td>XXX</td>
                             <td style="text-align: center; padding: 5px">
                                 <button style="border: none; background: none; padding: 0;"
                                     onclick="editarPaciente({{ $paciente->id }})" data-toggle="tooltip" data-placement="top"

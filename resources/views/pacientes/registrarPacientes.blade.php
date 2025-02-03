@@ -62,15 +62,6 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <select class="form-select" name="distrito" id="distrito" required>
-                        <option value="">Distrito</option>
-                        @foreach ($distritos as $distrito)
-                            <option value="{{ $distrito->id }}">{{ $distrito->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <select class="form-select" name="departamento" id="departamento" required>
                         <option value="">Departamento</option>
                         @foreach ($departamentos as $departamento)
@@ -78,14 +69,23 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
 
-            <div class="form-row">
                 <div class="form-group">
                     <select class="form-select" name="provincia" id="provincia" required>
                         <option value="">Provincia</option>
                         @foreach ($provincias as $provincia)
                             <option value="{{ $provincia->id }}">{{ $provincia->nombre }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <select class="form-select" name="distrito" id="distrito" required>
+                        <option value="">Distrito</option>
+                        @foreach ($distritos as $distrito)
+                            <option value="{{ $distrito->id }}">{{ $distrito->nombre }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -97,15 +97,6 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group">
-                    <select class="form-select" name="gobierno_local" id="gobierno_local" required>
-                        <option value="">Gobierno Local</option>
-                        @foreach ($gobierno_local as $gobLocal)
-                            <option value="{{ $gobLocal->id }}">{{ $gobLocal->nombre }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
                 <div class="form-group">
                     <input type="text" class="form-control" id="ubicacion_historia" name="ubicacion_historia"
                         placeholder="Ubicación de la historia" required>
@@ -157,7 +148,6 @@
             let departamento = document.getElementById('departamento').value;
             let provincia = document.getElementById('provincia').value;
             let direccion = document.getElementById('direccion').value;
-            let gobierno_local = document.getElementById('gobierno_local').value;
             let ubicacion_historia = document.getElementById('ubicacion_historia').value;
             let observaciones = document.getElementById('observaciones').value;
 
@@ -178,7 +168,6 @@
             formData.append('departamento', departamento);
             formData.append('provincia', provincia);
             formData.append('direccion', direccion);
-            formData.append('gobierno_local', gobierno_local);
             formData.append('ubicacion_historia', ubicacion_historia);
             formData.append('observaciones', observaciones);
 

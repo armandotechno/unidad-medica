@@ -61,18 +61,6 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <select class="form-select" name="distrito" id="distrito" required>
-                        <option value="">Distrito</option>
-                        @foreach ($distritos as $distrito)
-                            <option value="{{ $distrito->id }}"
-                                {{ $paciente->distrito_id == $distrito->id ? 'selected' : '' }}>
-                                {{ $distrito->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <select class="form-select" name="departamento" id="departamento" required>
                         <option value="">Departamento</option>
                         @foreach ($departamentos as $departamento)
@@ -83,9 +71,7 @@
                         @endforeach
                     </select>
                 </div>
-            </div>
 
-            <div class="form-row">
                 <div class="form-group">
                     <select class="form-select" name="provincia" id="provincia" required>
                         <option value="">Provincia</option>
@@ -98,6 +84,24 @@
                     </select>
                 </div>
 
+
+
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <select class="form-select" name="distrito" id="distrito" required>
+                        <option value="">Distrito</option>
+                        @foreach ($distritos as $distrito)
+                            <option value="{{ $distrito->id }}"
+                                {{ $paciente->distrito_id == $distrito->id ? 'selected' : '' }}>
+                                {{ $distrito->nombre }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <input value="{{ $paciente->direccion }}" type="text" class="form-control" id="direccion"
                         name="direccion" placeholder="Dirección" required>
@@ -105,18 +109,6 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group">
-                    <select class="form-select" name="gobierno_local" id="gobierno_local" required>
-                        <option value="">Gobierno Local</option>
-                        @foreach ($gobierno_local as $gobLocal)
-                            <option value="{{ $gobLocal->id }}"
-                                {{ $paciente->goblocal_id == $gobLocal->id ? 'selected' : '' }}>
-                                {{ $gobLocal->nombre }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-
                 <div class="form-group">
                     <input value="{{ $paciente->ubihistoria }}" type="text" class="form-control"
                         id="ubicacion_historia" name="ubicacion_historia" placeholder="Ubicación de la historia"
@@ -164,7 +156,6 @@
                 let departamento = document.getElementById('departamento').value;
                 let provincia = document.getElementById('provincia').value;
                 let direccion = document.getElementById('direccion').value;
-                let gobierno_local = document.getElementById('gobierno_local').value;
                 let ubicacion_historia = document.getElementById('ubicacion_historia').value;
                 let observaciones = document.getElementById('observaciones').value;
 
@@ -186,7 +177,6 @@
                 formData.append('departamento', departamento);
                 formData.append('provincia', provincia);
                 formData.append('direccion', direccion);
-                formData.append('gobierno_local', gobierno_local);
                 formData.append('ubicacion_historia', ubicacion_historia);
                 formData.append('observaciones', observaciones);
 
@@ -213,12 +203,13 @@
                             success: function(data) {
                                 if (data == 1) {
                                     Swal.fire("Éxito", "Paciente editado correctamente.", "success").then(
-                                    () => {
+                                        () => {
                                             window.location.href = '{{ url('pacientes') }}';
                                         });
 
                                 } else {
-                                    Swal.fire("Error", "Ocurrió un error al registrar el paciente.", "error");
+                                    Swal.fire("Error", "Ocurrió un error al registrar el paciente.",
+                                        "error");
                                 }
                             },
                             error: function(xhr, status, error) {
