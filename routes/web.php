@@ -29,6 +29,10 @@ Route::middleware("auth")->group(function () {
 
     // Rutas de usuarios y doctores
     Route::get('/usuarios', [App\Http\Controllers\UsuarioController::class, 'usuarios'])->name('usuarios');
+    Route::get('/nuevoUsuario', [App\Http\Controllers\UsuarioController::class, 'nuevoUsuario'])->name('nuevoUsuario');
+    Route::post('/crearUsuario', [App\Http\Controllers\UsuarioController::class, 'crearUsuario'])->name('crearUsuario');
+    Route::post('/editarUsuario', [App\Http\Controllers\UsuarioController::class, 'editarUsuario'])->name('editarUsuario');
+    Route::post('/eliminarUsuario', [App\Http\Controllers\UsuarioController::class, 'eliminarUsuario'])->name('eliminarUsuario');
 
     // Rutas de doctores
     Route::get('/doctores', [App\Http\Controllers\DoctorController::class, 'doctores'])->name('doctores');
