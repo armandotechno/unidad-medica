@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <input value="{{ $paciente->nombre_completo }}" type="text" class="form-control" id="nombre"
                         name="nombre" placeholder="Nombre completo"
-                        oninput="this.value = this.value = this.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');"
+                        oninput="this.value = this.value.replace(/[^a-zA-ZñÑ' áéíóúÁÉÍÓÚâêîôûÂÊÎÔÛàèìòùÀÈÌÒÙ`´^]/g, '')"
                         maxlength="32" required>
                 </div>
 
