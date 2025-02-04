@@ -219,18 +219,18 @@
             location.reload(); // Recarga la página cuando el modal se cierra
         });
 
-        function editarDoctores(id) {
+        function editarDoctor(id) {
 
-            let usuario_id = id
+            let doctor_id = id
 
             $.ajax({
                 type: 'POST',
-                url: "{{ url('editarUsuario') }}",
+                url: "{{ url('editarDoctor') }}",
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 data: {
-                    usuario_id
+                    doctor_id
                 },
                 success: function(data) {
                     $("#myModal").modal();
@@ -243,13 +243,13 @@
             });
         }
 
-        function eliminarDoctores(id) {
+        function eliminarDoctor(id) {
 
-            let usuario_id = id
+            let doctor_id = id
 
             swal({
                 title: 'Confirmación',
-                text: "¿Está seguro de eliminar a este usuario?",
+                text: "¿Está seguro de eliminar a este doctor?",
                 type: 'question',
                 showCancelButton: true,
                 confirmButtonColor: 'success',
@@ -260,12 +260,12 @@
                 if (result.value) {
                     $.ajax({
                         type: 'POST',
-                        url: "{{ url('eliminarUsuario') }}",
+                        url: "{{ url('eliminarDoctor') }}",
                         headers: {
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         },
                         data: {
-                            usuario_id
+                            doctor_id
                         },
                         success: function(data) {
                             if (data === 1) {

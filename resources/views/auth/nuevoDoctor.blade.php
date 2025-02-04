@@ -31,6 +31,14 @@
                 </div>
             </div>
 
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="cmp">CMP</label>
+                    <input type="text" class="form-control" id="cmp" name="cmp" placeholder="CMP"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="6" required>
+                </div>
+            </div>
+
             <div class="form-group text-center">
                 <button onclick="crearDoctor()" type="button" class="btn btn-primary">
                     CREAR DOCTOR
@@ -60,8 +68,9 @@
         const crearDoctor = () => {
             const nombre = document.getElementById('nombre').value;
             const dni = document.getElementById('dni').value;
+            const cmp = document.getElementById('cmp').value;
 
-            if (nombre === '' || dni === '') {
+            if (nombre === '' || dni === '' || cmp === '') {
                 Swal.fire({
                     type: 'warning',
                     title: 'Todos los campos son obligatorios.',
@@ -80,7 +89,15 @@
             } else if (nombre.length < 6) {
                 Swal.fire({
                     type: 'warning',
-                    title: 'El nombre de usuario debe tener al menos 6 caracteres.',
+                    title: 'El nombre del doctor debe tener al menos 6 caracteres.',
+                    confirmButtonText: 'Aceptar',
+                    position: 'center',
+                    backdrop: false
+                });
+            } else if (cmp.length < 6) {
+                Swal.fire({
+                    type: 'warning',
+                    title: 'El cmp debe tener al menos 6 caracteres.',
                     confirmButtonText: 'Aceptar',
                     position: 'center',
                     backdrop: false
@@ -90,6 +107,7 @@
                 let formData = new FormData();
                 formData.append('nombre', nombre);
                 formData.append('dni', dni);
+                formData.append('cmp', cmp);
 
                 Swal.fire({
                     type: 'question',
@@ -122,6 +140,8 @@
 
                                 } else if ( data == 2 ) {
                                     Swal.fire("Alerta", "El DNI ya está registrado.", "warning")
+                                } else if ( data == 3 ) {
+                                    Swal.fire("Alerta", "El CMP ya está registrado.", "warning")
                                 } else {
                                     Swal.fire("Error", "Ocurrió un error al crear el usuario.",
                                         "error");

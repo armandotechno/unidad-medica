@@ -39,6 +39,9 @@ Route::middleware("auth")->group(function () {
     Route::get('/doctores', [App\Http\Controllers\DoctorController::class, 'doctores'])->name('doctores');
     Route::get('/nuevoDoctor', [App\Http\Controllers\DoctorController::class, 'nuevoDoctor'])->name('nuevoDoctor');
     Route::post('/crearDoctor', [App\Http\Controllers\DoctorController::class, 'crearDoctor'])->name('crearDoctor');
+    Route::post('/editarDoctor', [App\Http\Controllers\DoctorController::class, 'editarDoctor'])->name('editarDoctor');
+    Route::post('/editarDatosDoctor', [App\Http\Controllers\DoctorController::class, 'editarDatosDoctor'])->name('editarDatosDoctor');
+    Route::post('/eliminarDoctor', [App\Http\Controllers\DoctorController::class, 'eliminarDoctor'])->name('eliminarDoctor');
 
     // Rutas de pacientes
     Route::get('/pacientes', [App\Http\Controllers\PacienteController::class, 'pacientes'])->name('pacientes');
