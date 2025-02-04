@@ -163,61 +163,67 @@
                     tipo_sangre === '' || distrito === '' || departamento === '' || provincia === '' || direccion === '') {
                     Swal.fire("Alerta", "Todos los campos son obligatorios", "warning");
                     return;
-                }
+                } else if (nombre.length < 6) {
+                    Swal.fire("Alerta", "El Nombre debe tener mínimo 6 caracteres.", "warning");
+                } else if (dni.length < 8) {
+                    Swal.fire("Alerta", "El DNI debe tener 8 dígitos.", "warning");
+                } else {
+                    let formData = new FormData();
+                    formData.append('paciente_id', paciente_id);
+                    formData.append('nombre', nombre);
+                    formData.append('dni', dni);
+                    formData.append('fecha_nacimiento', fecha_nacimiento);
+                    formData.append('genero', genero);
+                    formData.append('nro_historia', nro_historia);
+                    formData.append('tipo_sangre', tipo_sangre);
+                    formData.append('distrito', distrito);
+                    formData.append('departamento', departamento);
+                    formData.append('provincia', provincia);
+                    formData.append('direccion', direccion);
+                    formData.append('ubicacion_historia', ubicacion_historia);
+                    formData.append('observaciones', observaciones);
 
-                let formData = new FormData();
-                formData.append('paciente_id', paciente_id);
-                formData.append('nombre', nombre);
-                formData.append('dni', dni);
-                formData.append('fecha_nacimiento', fecha_nacimiento);
-                formData.append('genero', genero);
-                formData.append('nro_historia', nro_historia);
-                formData.append('tipo_sangre', tipo_sangre);
-                formData.append('distrito', distrito);
-                formData.append('departamento', departamento);
-                formData.append('provincia', provincia);
-                formData.append('direccion', direccion);
-                formData.append('ubicacion_historia', ubicacion_historia);
-                formData.append('observaciones', observaciones);
+                    Swal.fire({
+                        title: 'Confirmación',
+                        text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
+                        type: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: 'success',
+                        cancelButtonColor: 'danger',
+                        cancelButtonText: 'No',
+                        confirmButtonText: 'Sí'
+                    }).then(function(result) {
+                        if (result.value) {
+                            $.ajax({
+                                type: 'POST',
+                                url: "{{ url('editarDatosPaciente') }}",
+                                headers: {
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(data) {
+                                    if (data == 1) {
+                                        Swal.fire("Éxito", "Paciente editado correctamente.", "success")
+                                            .then(
+                                                () => {
+                                                    window.location.href = '{{ url('pacientes') }}';
+                                                });
 
-                Swal.fire({
-                    title: 'Confirmación',
-                    text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
-                    type: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: 'success',
-                    cancelButtonColor: 'danger',
-                    cancelButtonText: 'No',
-                    confirmButtonText: 'Sí'
-                }).then(function(result) {
-                    if (result.value) {
-                        $.ajax({
-                            type: 'POST',
-                            url: "{{ url('editarDatosPaciente') }}",
-                            headers: {
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-                            success: function(data) {
-                                if (data == 1) {
-                                    Swal.fire("Éxito", "Paciente editado correctamente.", "success").then(
-                                        () => {
-                                            window.location.href = '{{ url('pacientes') }}';
-                                        });
-
-                                } else {
-                                    Swal.fire("Error", "Ocurrió un error al registrar el paciente.",
+                                    } else {
+                                        Swal.fire("Error", "Ocurrió un error al registrar el paciente.",
+                                            "error");
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    Swal.fire("Error", "Ocurrió un error en la solicitud: " + error,
                                         "error");
                                 }
-                            },
-                            error: function(xhr, status, error) {
-                                Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
-                            }
-                        });
-                    }
+                            });
+                        }
 
-                });
+                    });
+                }
             }
         </script>

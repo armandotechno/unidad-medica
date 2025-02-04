@@ -82,7 +82,6 @@ class PacienteController extends Controller
             'departamento_id' => $request->departamento,
             'provincia_id' => $request->provincia,
             'distrito_id' => $request->distrito,
-            'goblocal_id' => $request->gobierno_local,
             'direccion' => $request->direccion,
             'ubihistoria' => $request->ubicacion_historia,
             'observaciones' => $request->observaciones,
