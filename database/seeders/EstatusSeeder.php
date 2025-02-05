@@ -17,6 +17,8 @@ class EstatusSeeder extends Seeder
         Estatus::insert([
             ['nombre' => 'Activo'],
             ['nombre' => 'Inactivo'],
+            ['nombre' => 'Cita Pendiente'],
+            ['nombre' => 'Cita Realizada'],
         ]);
     }
 }
