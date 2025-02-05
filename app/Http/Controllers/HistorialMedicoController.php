@@ -39,4 +39,9 @@ class HistorialMedicoController extends Controller
             ]);
         }
     }
+
+    public function guardarConsulta(Request $request) {
+
+        dd($request->all());
+    }
 }

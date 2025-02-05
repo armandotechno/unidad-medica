@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo"
-                    value="{{ session('cita')[0]->nombre_completo }}" disabled>
+                        value="{{ session('cita')[0]->nombre_completo }}" disabled>
                 </div>
             </div>
 
@@ -35,7 +35,8 @@
                 <div class="form-group">
                     <label for="fecha">Fecha y Hora</label>
                     <input type="text" class="form-control" id="fecha" name="fecha"
-                        value="{{ \Carbon\Carbon::parse(session('cita')[0]->fecha_solicitud)->format('d-m-Y') . ' ' . session('cita')[0]->hora_cita }}" disabled>
+                        value="{{ \Carbon\Carbon::parse(session('cita')[0]->fecha_solicitud)->format('d-m-Y') . ' ' . session('cita')[0]->hora_cita }}"
+                        disabled>
                 </div>
 
                 <div class="form-group">
@@ -118,8 +119,8 @@
 
                 <div class="form-group">
                     <label for="especialidad">Especialidad</label>
-                    <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Especialidad"
-                        value="{{ $especialidad->nombre }}" disabled>
+                    <input type="text" class="form-control" id="especialidad" name="especialidad"
+                        placeholder="Especialidad" value="{{ $especialidad->nombre }}" disabled>
                 </div>
             </div>
 
@@ -148,7 +149,7 @@
             </div>
 
             <div class="form-group text-center">
-                <button onclick="" type="button" class="btn btn-primary">
+                <button onclick="guardarCita()" type="button" class="btn btn-primary">
                     GUARDAR CONSULTA
                 </button>
 
@@ -163,3 +164,97 @@
         </form>
     </div>
 @endsection
+
+@section('javascripts')
+    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert/jquery.sweet-alert.custom.js') }}"></script>
+
+    <script>
+        const guardarCita = () => {
+
+            const dni = document.getElementById('dni').value;
+            const nombre = document.getElementById('nombre').value;
+            const fecha = document.getElementById('fecha').value;
+            const genero = document.getElementById('genero').value;
+            const numero_consulta = document.getElementById('numero_consulta').value;
+            const motivo_consulta = document.getElementById('motivo_consulta').value;
+            const numero_historia = document.getElementById('numero_historia').value;
+            const sintomas_actuales = document.getElementById('sintomas_actuales').value;
+            const diagnostico_principal = document.getElementById('diagnostico_principal').value;
+            const diagnostico_adicional = document.getElementById('diagnostico_adicional').value;
+            const edad = document.getElementById('edad').value;
+            const plan_tratamiento = document.getElementById('plan_tratamiento').value;
+            const medico = document.getElementById('medico').value;
+            const especialidad = document.getElementById('especialidad').value;
+            const tipo_seguro = document.getElementById('tipo_seguro').value;
+            const medicamentos_recetados = document.getElementById('medicamentos_recetados').value;
+            const consultas_previas = document.getElementById('consultas_previas').value;
+
+            let formData = new FormData();
+            formData.append('dni', dni);
+            formData.append('nombre', nombre);
+            formData.append('fecha', fecha);
+            formData.append('genero', genero);
+            formData.append('numero_consulta', numero_consulta);
+            formData.append('motivo_consulta', motivo_consulta);
+            formData.append('numero_historia', numero_historia);
+            formData.append('sintomas_actuales', sintomas_actuales);
+            formData.append('diagnostico_principal', diagnostico_principal);
+            formData.append('diagnostico_adicional', diagnostico_adicional);
+            formData.append('edad', edad);
+            formData.append('plan_tratamiento', plan_tratamiento);
+            formData.append('medico', medico);
+            formData.append('especialidad', especialidad);
+            formData.append('tipo_seguro', tipo_seguro);
+            formData.append('medicamentos_recetados', medicamentos_recetados);
+            formData.append('consultas_previas', consultas_previas);
+
+            Swal.fire({
+                title: 'Confirmación',
+                text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
+                type: 'question',
+                showCancelButton: true,
+                confirmButtonColor: 'success',
+                cancelButtonColor: 'danger',
+                cancelButtonText: 'No',
+                confirmButtonText: 'Sí'
+            }).then(function(result) {
+                if (result.value) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ url('guardarConsulta') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(data) {
+                            if (data == 1) {
+                                Swal.fire("Éxito", "Paciente registrado correctamente.", "success")
+                                    .then(
+                                        () => {
+                                            window.location.href = '{{ url('pacientes') }}';
+                                        });
+
+                            } else if (data == 2) {
+                                Swal.fire("Alerta",
+                                    "El DNI o el número de historia clínica ya están registrados.",
+                                    "warning")
+                            } else {
+                                Swal.fire("Error", "Ocurrió un error al registrar el paciente.",
+                                    "error");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire("Error", "Ocurrió un error en la solicitud: " + error,
+                                "error");
+                        }
+                    });
+                }
+            });
+
+
+        }
+    </script>
