@@ -15,77 +15,87 @@
         <form action="#" method="POST">
             @csrf
 
+            <!-- DNI y Nombre primero -->
             <div class="form-row">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento"
-                        placeholder="Fecha y hora" onfocus="(this.type='date')" max="{{ date('Y-m-d') }}" required>
+                    <label for="dni">DNI</label>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI:"
+                        value="{{ session('cita')[0]->dni }}" disabled>
                 </div>
 
                 <div class="form-group">
-                    <select class="form-select" name="genero" id="genero" required>
-                        <option value="">Género</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                    </select>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo"
+                    value="{{ session('cita')[0]->nombre_completo }}" disabled>
+                </div>
+            </div>
+
+            <!-- Resto de los campos -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fecha">Fecha y Hora</label>
+                    <input type="text" class="form-control" id="fecha" name="fecha"
+                        value="{{ \Carbon\Carbon::parse(session('cita')[0]->fecha_solicitud)->format('d-m-Y') . ' ' . session('cita')[0]->hora_cita }}" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <input type="text" class="form-control" id="genero" name="genero" placeholder="Genero"
+                        value="{{ session('cita')[0]->genero == 'F' ? 'Femenino' : 'Masculino' }}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
+                    <label for="numero_consulta">Número de consulta</label>
                     <input type="text" class="form-control" id="numero_consulta" name="numero_consulta"
                         placeholder="Número de consulta" maxlength="8" required>
                 </div>
 
                 <div class="form-group">
+                    <label for="motivo_consulta">Motivo de consulta</label>
                     <input type="text" class="form-control" id="motivo_consulta" name="motivo_consulta"
-                        placeholder="Motivo de consulta: " required>
+                        placeholder="Motivo de consulta" required>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
+                    <label for="numero_historia">N° Historia clínica</label>
                     <input type="text" class="form-control" id="numero_historia" name="numero_historia"
                         placeholder="N° Historia clínica" required>
                 </div>
 
                 <div class="form-group">
+                    <label for="sintomas_actuales">Síntomas actuales</label>
                     <input type="text" class="form-control" id="sintomas_actuales" name="sintomas_actuales"
-                        placeholder="Sintomas actuales" required>
+                        placeholder="Sintomas actuales" value="{{ session('cita')[0]->sintomas }}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre completo"
-                        oninput="this.value = this.value = input.value.replace(/[^a-zA-ZñÑáéíóúÁÉÍÓÚ\s]/g, '');"
-                        maxlength="32" required>
-                </div>
-
-                <div class="form-group">
+                    <label for="diagnostico_principal">Diagnóstico principal</label>
                     <input type="text" class="form-control" id="diagnostico_principal" name="diagnostico_principal"
                         placeholder="Diagnóstico principal" required>
                 </div>
+
+                <div class="form-group">
+                    <label for="diagnostico_adicional">Diagnóstico adicional</label>
+                    <input type="text" class="form-control" id="diagnostico_adicional" name="diagnostico_adicional"
+                        placeholder="Diagnóstico adicionales" required>
+                </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
+                    <label for="edad">Edad</label>
                     <input type="text" class="form-control" id="edad" name="edad" placeholder="Edad"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="3" required>
                 </div>
 
                 <div class="form-group">
-                    <input type="text" class="form-control" id="diagnostico_adicional" name="diagnostico_adicional"
-                        placeholder="Diagnóstico adicionales:" required>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="dni" name="dni" placeholder="DNI:"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="12" required>
-                </div>
-
-                <div class="form-group">
+                    <label for="plan_tratamiento">Plan de tratamiento</label>
                     <input type="text" class="form-control" id="plan_tratamiento" name="plan_tratamiento"
                         placeholder="Plan de tratamiento" required>
                 </div>
@@ -93,22 +103,29 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="medico" name="medico"
-                        placeholder="Médico que preescribe" required>
+                    <label for="medico">Médico</label>
+                    <select class="form-select" name="medico" id="medico" required>
+                        <option value="">Seleccionar médico</option>
+                        @foreach ($medicos as $medico)
+                            <option value="{{ $medico->id }}">{{ $medico->nombre }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
+                @php
+                    $especialidad = \App\Models\Atencion::where('id', session('cita')[0]->especialidad_id)->first();
+                @endphp
+
                 <div class="form-group">
-                    <select class="form-select" name="especialidad" id="especialidad" required>
-                        <option value="">Especialidad</option>
-                        <option value="1">Especialidad 1</option>
-                        <option value="2">Especialidad 2</option>
-                        <option value="3">Especialidad 3</option>
-                    </select>
+                    <label for="especialidad">Especialidad</label>
+                    <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Especialidad"
+                        value="{{ $especialidad->nombre }}" disabled>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
+                    <label for="tipo_seguro">Tipo de seguro</label>
                     <select class="form-select" name="tipo_seguro" id="tipo_seguro" required>
                         <option value="">Tipo de seguro</option>
                         <option value="1">Particular</option>
@@ -139,7 +156,7 @@
                     IMPRIMIR RECETA
                 </button>
 
-                <button onclick="" type="button" class="btn btn-primary">
+                <button onclick="window.location.href='/citas';" type="button" class="btn btn-primary">
                     CANCELAR CONSULTA
                 </button>
             </div>

@@ -70,11 +70,27 @@
             </li>
             <li>
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
-                    <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;"><i
-                            class="fa-solid fa-book-medical"></i></h5>
-                    <a href="{{ url('/historialMedico') }}" style="font-size: 24px; line-height: 34px;">Historial
-                        médico</a>
+                    <h5 style="font-size: 34px; margin-right: 20px; line-height: 34px;">
+                        <i class="fa-solid fa-book-medical"></i>
+                    </h5>
+                    <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"
+                        style="font-size: 24px; line-height: 34px;">Historial Médico</a>
                 </div>
+                <!-- Submenú de Administración -->
+                <ul aria-expanded="false" class="collapse">
+                    <li>
+                        <a href="{{ url('/citas') }}" style="font-size: 24px; line-height: 34px;">
+                            <i class="fa-solid fa-notes-medical" style="margin-right: 10px;"></i>
+                            Citas Pendientes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/consultasPrevias') }}" style="font-size: 24px; line-height: 34px;">
+                            <i class="fa-solid fa-book-open" style="margin-right: 10px;"></i>
+                            Consultas Previas
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <div style="display: flex; margin-top: 10px; align-items: center; padding: 10px;">
