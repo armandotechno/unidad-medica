@@ -5,6 +5,14 @@ h3 {
     margin-bottom: 30px;
 }
 
+input {
+    text-transform: uppercase;
+}
+
+.input-error {
+    border: 2px solid red !important;
+}
+
 label {
     font-weight: bold;
     padding-left: 15px;

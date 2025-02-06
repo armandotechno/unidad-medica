@@ -27,7 +27,7 @@ class HistorialMedicoController extends Controller
     {
         // dd($request->dni);
 
-        $cita = Cita::where('dni', $request->dni)->get();
+        $cita = Cita::where('dni', $request->dni)->where('estatus_id', 3)->get();
 
         if ($cita->isNotEmpty()) {
 

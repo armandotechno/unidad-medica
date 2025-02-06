@@ -137,7 +137,7 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="medicamentos_recetados">MEDICAMENTOS RECETATOS:</label>
+                    <label for="medicamentos_recetados">MEDICAMENTOS RECETADOS:</label>
                     <textarea class="form-control" id="medicamentos_recetados" name="medicamentos_recetados" rows="2"
                         oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';" placeholder="XXX......"></textarea>
                 </div>
@@ -176,85 +176,134 @@
 
     <script>
         const guardarCita = () => {
+    // Limpiar estilos de error previos
+    const inputs = document.querySelectorAll('.form-control, .form-select');
+    inputs.forEach(input => {
+        input.classList.remove('input-error');
+    });
 
-            const dni = document.getElementById('dni').value;
-            const nombre = document.getElementById('nombre').value;
-            const fecha = document.getElementById('fecha').value;
-            const genero = document.getElementById('genero').value;
-            const numero_consulta = document.getElementById('numero_consulta').value;
-            const motivo_consulta = document.getElementById('motivo_consulta').value;
-            const numero_historia = document.getElementById('numero_historia').value;
-            const sintomas_actuales = document.getElementById('sintomas_actuales').value;
-            const diagnostico_principal = document.getElementById('diagnostico_principal').value;
-            const diagnostico_adicional = document.getElementById('diagnostico_adicional').value;
-            const edad = document.getElementById('edad').value;
-            const plan_tratamiento = document.getElementById('plan_tratamiento').value;
-            const medico = document.getElementById('medico').value;
-            const especialidad = document.getElementById('especialidad_id').value;
-            const tipo_seguro = document.getElementById('tipo_seguro').value;
-            const medicamentos_recetados = document.getElementById('medicamentos_recetados').value;
-            const consultas_previas = document.getElementById('consultas_previas').value;
-            const paciente_id = document.getElementById('paciente_id').value;
+    const dni = document.getElementById('dni').value;
+    const nombre = document.getElementById('nombre').value;
+    const fecha = document.getElementById('fecha').value;
+    const genero = document.getElementById('genero').value;
+    const numero_consulta = document.getElementById('numero_consulta').value;
+    const motivo_consulta = document.getElementById('motivo_consulta').value;
+    const numero_historia = document.getElementById('numero_historia').value;
+    const sintomas_actuales = document.getElementById('sintomas_actuales').value;
+    const diagnostico_principal = document.getElementById('diagnostico_principal').value;
+    const diagnostico_adicional = document.getElementById('diagnostico_adicional').value;
+    const edad = document.getElementById('edad').value;
+    const plan_tratamiento = document.getElementById('plan_tratamiento').value;
+    const medico = document.getElementById('medico').value;
+    const especialidad = document.getElementById('especialidad_id').value;
+    const tipo_seguro = document.getElementById('tipo_seguro').value;
+    const medicamentos_recetados = document.getElementById('medicamentos_recetados').value;
+    const consultas_previas = document.getElementById('consultas_previas').value;
+    const paciente_id = document.getElementById('paciente_id').value;
 
-            let formData = new FormData();
-            formData.append('dni', dni);
-            formData.append('nombre', nombre);
-            formData.append('fecha', fecha);
-            formData.append('genero', genero);
-            formData.append('numero_consulta', numero_consulta);
-            formData.append('motivo_consulta', motivo_consulta);
-            formData.append('numero_historia', numero_historia);
-            formData.append('sintomas_actuales', sintomas_actuales);
-            formData.append('diagnostico_principal', diagnostico_principal);
-            formData.append('diagnostico_adicional', diagnostico_adicional);
-            formData.append('edad', edad);
-            formData.append('plan_tratamiento', plan_tratamiento);
-            formData.append('medico', medico);
-            formData.append('especialidad', especialidad);
-            formData.append('tipo_seguro', tipo_seguro);
-            formData.append('medicamentos_recetados', medicamentos_recetados);
-            formData.append('consultas_previas', consultas_previas);
-            formData.append('paciente_id', paciente_id);
+    let hasError = false;
 
-            Swal.fire({
-                title: 'Confirmación',
-                text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
-                type: 'question',
-                showCancelButton: true,
-                confirmButtonColor: 'success',
-                cancelButtonColor: 'danger',
-                cancelButtonText: 'No',
-                confirmButtonText: 'Sí'
-            }).then(function(result) {
-                if (result.value) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "{{ url('guardarConsulta') }}",
-                        headers: {
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire("Éxito", "Consulta registrada correctamente.", "success")
-                                    .then(
-                                        () => {
-                                            window.location.href = '{{ url('citas') }}';
-                                        });
-                            } else {
-                                Swal.fire("Alerta", response.message, "warning");
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            Swal.fire("Error", "Ocurrió un error en la solicitud: " + error,
-                                "error");
+    // Verificar campos vacíos y aplicar clase de error
+    if (numero_consulta === '') {
+        document.getElementById('numero_consulta').classList.add('input-error');
+        hasError = true;
+    }
+    if (motivo_consulta === '') {
+        document.getElementById('motivo_consulta').classList.add('input-error');
+        hasError = true;
+    }
+    if (diagnostico_principal === '') {
+        document.getElementById('diagnostico_principal').classList.add('input-error');
+        hasError = true;
+    }
+    if (diagnostico_adicional === '') {
+        document.getElementById('diagnostico_adicional').classList.add('input-error');
+        hasError = true;
+    }
+    if (edad === '') {
+        document.getElementById('edad').classList.add('input-error');
+        hasError = true;
+    }
+    if (plan_tratamiento === '') {
+        document.getElementById('plan_tratamiento').classList.add('input-error');
+        hasError = true;
+    }
+    if (medico === '') {
+        document.getElementById('medico').classList.add('input-error');
+        hasError = true;
+    }
+    if (tipo_seguro === '') {
+        document.getElementById('tipo_seguro').classList.add('input-error');
+        hasError = true;
+    }
+    if (medicamentos_recetados === '') {
+        document.getElementById('medicamentos_recetados').classList.add('input-error');
+        hasError = true;
+    }
+    // Agregar más validaciones según sea necesario
+
+    if (hasError) {
+        Swal.fire("Alerta", "Todos los campos son obligatorios", "warning");
+        return;
+    } else {
+        // El resto de tu código para enviar el formulario
+        let formData = new FormData();
+        formData.append('dni', dni);
+        formData.append('nombre', nombre);
+        formData.append('fecha', fecha);
+        formData.append('genero', genero);
+        formData.append('numero_consulta', numero_consulta);
+        formData.append('motivo_consulta', motivo_consulta);
+        formData.append('numero_historia', numero_historia);
+        formData.append('sintomas_actuales', sintomas_actuales);
+        formData.append('diagnostico_principal', diagnostico_principal);
+        formData.append('diagnostico_adicional', diagnostico_adicional);
+        formData.append('edad', edad);
+        formData.append('plan_tratamiento', plan_tratamiento);
+        formData.append('medico', medico);
+        formData.append('especialidad', especialidad);
+        formData.append('tipo_seguro', tipo_seguro);
+        formData.append('medicamentos_recetados', medicamentos_recetados);
+        formData.append('consultas_previas', consultas_previas);
+        formData.append('paciente_id', paciente_id);
+
+        // Confirmación y envío de datos
+        Swal.fire({
+            title: 'Confirmación',
+            text: "¿Está seguro que quiere guardar los datos suministrados? Esta opción será irreversible",
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: 'success',
+            cancelButtonColor: 'danger',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Sí'
+        }).then(function(result) {
+            if (result.value) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url('guardarConsulta') }}",
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire("Éxito", "Consulta registrada correctamente.", "success")
+                                .then(() => {
+                                    window.location.href = '{{ url('citas') }}';
+                                });
+                        } else {
+                            Swal.fire("Alerta", response.message, "warning");
                         }
-                    });
-                }
-            });
-
-
-        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire("Error", "Ocurrió un error en la solicitud: " + error, "error");
+                    }
+                });
+            }
+        });
+    }
+}
     </script>
