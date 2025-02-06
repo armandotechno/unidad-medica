@@ -57,6 +57,11 @@ Route::middleware("auth")->group(function () {
     Route::get('/buscarCitas', [App\Http\Controllers\HistorialMedicoController::class, 'buscarCitas'])->name('buscarCitas');
     Route::post('/guardarConsulta', [App\Http\Controllers\HistorialMedicoController::class, 'guardarConsulta'])->name('guardarConsulta');
 
+    // Rutas para las consultas previas
+    Route::get('/consultasPrevias', [App\Http\Controllers\HistorialMedicoController::class, 'consultasPrevias'])->name('consultasPrevias');
+    Route::get('/buscarConsultas', [App\Http\Controllers\HistorialMedicoController::class, 'buscarConsultas'])->name('buscarConsultas');
+    Route::get('/visualizarConsulta', [App\Http\Controllers\HistorialMedicoController::class, 'visualizarConsulta'])->name('visualizarConsulta');
+
     //Rutas de reportes de pacientes
     Route::get('/reportePacientes', [App\Http\Controllers\ReportePacienteController::class, 'reportePacientes'])->name('reportePacientes');
 

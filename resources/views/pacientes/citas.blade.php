@@ -18,7 +18,7 @@
                 @csrf
                 <div class="form-group">
                     <input type="text" class="form-control" id="dni" name="dni"
-                        placeholder="Ingrese el DNI del paciente"
+                        placeholder="DNI del paciente"
                         oninput="this.value = this.value.replace(/[^0-9]/g, '');"
                         maxlength="8" required>
                 </div>

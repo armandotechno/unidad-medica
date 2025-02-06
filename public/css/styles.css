@@ -5,10 +5,6 @@ h3 {
     margin-bottom: 30px;
 }
 
-input {
-    text-transform: uppercase;
-}
-
 .input-error {
     border: 2px solid red !important;
 }
@@ -45,11 +41,13 @@ label {
 }
 
 .btn-primary {
-    padding: 10px 15px; /* Reduje el padding (antes era 15px 20px) */
+    padding: 10px 15px;
+    /* Reduje el padding (antes era 15px 20px) */
     background-color: #040404;
     border: none;
     outline: none;
-    font-size: 16px; /* Reduje el tamaño de la fuente (antes era 18px) */
+    font-size: 16px;
+    /* Reduje el tamaño de la fuente (antes era 18px) */
     transition: background-color 0.3s ease;
 }
 
@@ -147,9 +145,3 @@ label {
     /* Añadí margen superior para separar el botón */
 }
 
-h3 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 40px;
-    margin-bottom: 30px;
-}

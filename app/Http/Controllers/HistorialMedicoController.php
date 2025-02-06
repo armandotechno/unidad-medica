@@ -65,9 +65,6 @@ class HistorialMedicoController extends Controller
 
     public function guardarConsulta(Request $request)
     {
-
-        // dd($request->all());
-
         $consulta = new Consulta();
         $consulta->paciente_id = $request->paciente_id;
         $consulta->motivo = $request->motivo_consulta;
@@ -93,5 +90,53 @@ class HistorialMedicoController extends Controller
             'success' => true,
             'message' => 'Consulta guardada correctamente.'
         ]);
+    }
+
+    public function consultasPrevias()
+    {
+
+        return view('pacientes.consultasPrevias');
+    }
+
+    public function buscarConsultas(Request $request)
+    {
+        // Obtener el DNI del request
+        $dni = $request->dni;
+
+        // Buscar las consultas con estatus_id 4 y que pertenezcan a un paciente con el DNI especificado
+        $consultas = Consulta::where('estatus_id', 4)
+            ->whereHas('paciente', function ($query) use ($dni) {
+                $query->where('dni', $dni);
+            })
+            ->get();
+
+        // Verificar si se encontraron consultas
+        if ($consultas->isNotEmpty()) {
+            return response()->json([
+                'success' => true,
+                'consultas' => $consultas,
+                'redirect' => route('consultasPrevias'), // Redirigir a la vista de consultas previas
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'No se encontraron consultas para el DNI proporcionado.',
+            ]);
+        }
+    }
+
+    public function visualizarConsulta(Request $request)
+    {
+        $consulta = Consulta::find($request->consulta_id);
+        // dd($consulta);
+
+        if ($consulta) {
+            return view('modals.modalVisualizarConsulta', compact('consulta'));
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Consulta no encontrada.'
+            ]);
+        }
     }
 }
