@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('paciente_id')->nullable()->comment('Id del paciente relacionado a la consulta');
             $table->string('motivo',200)->nullable()->comment('Motivo de la consulta');
             $table->string('nroconsulta',8)->nullable()->comment('numero de consulta');
+            $table->string('nrohistoria',8)->nullable()->comment('Guarda el numero de historia del paciente');
             $table->string('sintomas',250)->nullable()->comment('sintomas actuales');
             $table->string('diagnosticoprin',250)->nullable()->comment('Diagnostico Principal');
             $table->string('diagnosticoadi',250)->nullable()->comment('Diagnostico Adicional');

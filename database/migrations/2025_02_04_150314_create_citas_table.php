@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('hora_cita', 10)->comment("Guarda la hora de la cita");
             $table->string('sintomas')->nullable()->comment('Guarda los síntomas del paciente');
             $table->integer('estatus_id')->nullable()->default(3)->comment('Guarda el id del estatus de la cita');
+            $table->timestamp('created_at')->default(now())->comment("Guarda la fecha en que fue creada la cita");
+            $table->timestamp('updated_at')->nullable()->comment("Guarda la fecha en que fue actualizada la cita");
         });
     }
 

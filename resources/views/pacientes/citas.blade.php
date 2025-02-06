@@ -52,7 +52,7 @@
                     if (response.success) {
                         window.location.href = response.redirect;
                     } else {
-                        Swal.fire("Error", response.message, "error");
+                        Swal.fire("Alerta", response.message, "warning");
                     }
                 },
                 error: function(xhr, status, error) {

@@ -64,13 +64,13 @@
                 <div class="form-group">
                     <label for="numero_historia">N° Historia clínica</label>
                     <input type="text" class="form-control" id="numero_historia" name="numero_historia"
-                        placeholder="N° Historia clínica" required>
+                        placeholder="N° Historia clínica" value="{{ session('numero_historia') }}" disabled>
                 </div>
 
                 <div class="form-group">
                     <label for="sintomas_actuales">Síntomas actuales</label>
                     <input type="text" class="form-control" id="sintomas_actuales" name="sintomas_actuales"
-                        placeholder="Sintomas actuales" value="{{ session('cita')[0]->sintomas }}" disabled>
+                        placeholder="Sintomas actuales" value="{{ session('cita')[0]->sintomas }}">
                 </div>
             </div>
 
@@ -148,6 +148,10 @@
                 </div>
             </div>
 
+            <input type="hidden" id="paciente_id" name="paciente_id" value="{{ session('paciente_id') }}">
+            <input type="hidden" id="especialidad_id" name="especialidad_id"
+                value="{{ session('cita')[0]->especialidad_id }}">
+
             <div class="form-group text-center">
                 <button onclick="guardarCita()" type="button" class="btn btn-primary">
                     GUARDAR CONSULTA
@@ -186,10 +190,11 @@
             const edad = document.getElementById('edad').value;
             const plan_tratamiento = document.getElementById('plan_tratamiento').value;
             const medico = document.getElementById('medico').value;
-            const especialidad = document.getElementById('especialidad').value;
+            const especialidad = document.getElementById('especialidad_id').value;
             const tipo_seguro = document.getElementById('tipo_seguro').value;
             const medicamentos_recetados = document.getElementById('medicamentos_recetados').value;
             const consultas_previas = document.getElementById('consultas_previas').value;
+            const paciente_id = document.getElementById('paciente_id').value;
 
             let formData = new FormData();
             formData.append('dni', dni);
@@ -209,6 +214,7 @@
             formData.append('tipo_seguro', tipo_seguro);
             formData.append('medicamentos_recetados', medicamentos_recetados);
             formData.append('consultas_previas', consultas_previas);
+            formData.append('paciente_id', paciente_id);
 
             Swal.fire({
                 title: 'Confirmación',
@@ -230,21 +236,15 @@
                         data: formData,
                         processData: false,
                         contentType: false,
-                        success: function(data) {
-                            if (data == 1) {
-                                Swal.fire("Éxito", "Paciente registrado correctamente.", "success")
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire("Éxito", "Consulta registrada correctamente.", "success")
                                     .then(
                                         () => {
-                                            window.location.href = '{{ url('pacientes') }}';
+                                            window.location.href = '{{ url('citas') }}';
                                         });
-
-                            } else if (data == 2) {
-                                Swal.fire("Alerta",
-                                    "El DNI o el número de historia clínica ya están registrados.",
-                                    "warning")
                             } else {
-                                Swal.fire("Error", "Ocurrió un error al registrar el paciente.",
-                                    "error");
+                                Swal.fire("Alerta", response.message, "warning");
                             }
                         },
                         error: function(xhr, status, error) {
