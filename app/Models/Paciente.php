@@ -11,4 +11,9 @@ class Paciente extends Model
 
         return $this->hasMany(Consulta::class, 'paciente_id', 'id');
     }
+
+    public function getCitas(): HasMany {
+
+        return $this->hasMany(Cita::class, 'dni', 'dni');
+    }
 }

@@ -24,16 +24,10 @@ class UsuarioController extends Controller
     {
 
         $dniExistente = Usuario::where('dni', $request->dni)->first();
-        $cmpExistente = Usuario::where('cmp', $request->cmp)->first();
 
         if ($dniExistente) {
             return 2;
         }
-
-        if ($cmpExistente) {
-            return 3;
-        }
-
 
         $usuario = new Usuario();
         $usuario->nombre_completo = $request->nombre;

@@ -64,5 +64,10 @@ Route::middleware("auth")->group(function () {
 
     //Rutas de reportes de pacientes
     Route::get('/reportePacientes', [App\Http\Controllers\ReportePacienteController::class, 'reportePacientes'])->name('reportePacientes');
+    Route::get('/reporteTotalAtenciones', [App\Http\Controllers\ReportePacienteController::class, 'reporteTotalAtenciones'])->name('reporteTotalAtenciones');
+    Route::get('/reporteConsultasPorMes', [App\Http\Controllers\ReportePacienteController::class, 'reporteConsultasPorMes'])->name('reporteConsultasPorMes');
+    Route::get('/reportePorMedico', [App\Http\Controllers\ReportePacienteController::class, 'reportePorMedico'])->name('reportePorMedico');
+    Route::get('/reporteTipoServicio', [App\Http\Controllers\ReportePacienteController::class, 'reporteTipoServicio'])->name('reporteTipoServicio');
+    Route::get('/reporteConsultasPendientes', [App\Http\Controllers\ReportePacienteController::class, 'reporteConsultasPendientes'])->name('reporteConsultasPendientes');
 
 });
