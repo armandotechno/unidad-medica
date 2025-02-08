@@ -258,6 +258,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fechaInicioGroup.style.display = 'none';
             fechaFinGroup.style.display = 'none';
             mesGroup.style.display = 'block'; // Mostrar campo de mes
+            anioGroup.style.display = 'block'; // Mostrar campo de año
             tipoServicio.style.display = 'none'; // Ocultar campo de tipo de servicio
         } else if (selectedOption === 'pacientes_por_servicio') {
             fechaInicioGroup.style.display = 'none';
