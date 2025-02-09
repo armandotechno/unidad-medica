@@ -108,6 +108,45 @@
             background-color: #fff;
             border: none;
         }
+
+        .dt-buttons .btn {
+            margin-right: 5px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .dt-buttons .btn-success {
+            background-color: #28a745;
+            /* Verde */
+            border: none;
+            color: white;
+        }
+
+        .dt-buttons .btn-success:hover {
+            background-color: #218838;
+            /* Verde oscuro al pasar el mouse */
+        }
+
+        .dt-buttons .btn-danger {
+            background-color: #dc3545;
+            /* Rojo */
+            border: none;
+            color: white;
+        }
+
+        .dt-buttons .btn-danger:hover {
+            background-color: #c82333;
+            /* Rojo oscuro al pasar el mouse */
+        }
+
+        /* Estilos para el contenedor de los botones */
+        .dt-buttons {
+            margin-bottom: 10px;
+        }
     </style>
 @endsection
 @section('body')
@@ -238,6 +277,10 @@
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables/buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/build/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('plugins/pdfmake/build/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
+
     <script src="{{ asset('js/reportes.js') }}"></script>
 
 @endsection

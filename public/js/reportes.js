@@ -10,6 +10,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const tipoServicio = document.getElementById('tipo_servicio');
     const generarReporteBtn = document.getElementById('generar_reporte_btn');
 
+    // Función para obtener el título del reporte según el tipo seleccionado
+    function obtenerTituloReporte() {
+        const tipoReporte = tipoReporteSelect.value;
+        switch (tipoReporte) {
+            case 'total_atenciones':
+                return 'Reporte de Total de Atenciones';
+            case 'consultas_por_medico':
+                return 'Reporte de Consultas por Médico';
+            case 'consultas_pendientes':
+                return 'Reporte de Consultas Pendientes';
+            case 'pacientes_por_servicio':
+                return 'Reporte de Pacientes por Servicio';
+            case 'consultas_por_mes':
+                return 'Reporte de Consultas por Mes';
+            default:
+                return 'Reporte de Consultas';
+        }
+    }
+
     // Función para mostrar la tabla con los datos
     function mostrarTabla(data) {
         // Mostrar la tabla
@@ -59,17 +78,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
             ],
-            dom: '<"row"<"col-sm-6"l><"col-sm-6"f>>rtip',
+            dom: 'Blfrtip',
             buttons: [
                 {
                     extend: 'excelHtml5',
                     text: 'Exportar a Excel',
-                    title: 'Reporte Consultas'
+                    title: function () {
+                        return obtenerTituloReporte(); // Título dinámico según el tipo de reporte
+                    },
+                    className: 'btn btn-success' // Clase para el botón de Excel
                 },
                 {
                     extend: 'pdfHtml5',
                     text: 'Exportar a PDF',
-                    title: 'Reporte Consultas'
+                    title: function () {
+                        return obtenerTituloReporte(); // Título dinámico según el tipo de reporte
+                    },
+                    className: 'btn btn-danger',
                 }
             ],
             lengthMenu: [
@@ -253,6 +278,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fechaInicioGroup.style.display = 'none';
             fechaFinGroup.style.display = 'none';
             mesGroup.style.display = 'none'; // Ocultar campo de mes
+            anioGroup.style.display = 'none'; // Mostrar campo de año
             tipoServicio.style.display = 'none'; // Ocultar campo de tipo de servicio
         } else if (selectedOption === 'consultas_por_mes') {
             fechaInicioGroup.style.display = 'none';
@@ -264,11 +290,13 @@ document.addEventListener('DOMContentLoaded', function () {
             fechaInicioGroup.style.display = 'none';
             fechaFinGroup.style.display = 'none';
             mesGroup.style.display = 'none'; // Ocultar campo de mes
+            anioGroup.style.display = 'none'; // Mostrar campo de año
             tipoServicio.style.display = 'block'; // Mostrar campo de tipo de servicio
         } else {
             fechaInicioGroup.style.display = 'block';
             fechaFinGroup.style.display = 'block';
             mesGroup.style.display = 'none'; // Ocultar campo de mes
+            anioGroup.style.display = 'none'; // Mostrar campo de año
             tipoServicio.style.display = 'none'; // Ocultar campo de tipo de servicio
         }
 
