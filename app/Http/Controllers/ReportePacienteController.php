@@ -119,9 +119,7 @@ class ReportePacienteController extends Controller
     public function reporteConsultasPendientes()
     {
         // Obtener las citas pendientes (estatus_id = 3) que tienen un paciente asociado
-        $reporte = Cita::with('paciente')
-            ->where('estatus_id', 3)
-            ->whereHas('paciente') // Asegúrate de que exista un paciente asociado
+        $reporte = Cita::where('estatus_id', 3)
             ->get()
             ->map(function ($cita) {
                 $cita->created_at_formatted = $cita->created_at->format('Y-m-d H:i:s');

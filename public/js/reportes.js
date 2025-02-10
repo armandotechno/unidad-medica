@@ -41,12 +41,18 @@ document.addEventListener('DOMContentLoaded', function () {
         var table = $('#consultasTable').DataTable({
             data: data, // Usar la data devuelta por el servidor
             columns: [{
-                data: 'paciente.nombre_completo',
-                title: 'Nombre'
+                data: null, // Cambiar a null para manejar la lógica en render
+                title: 'Nombre',
+                render: function (data) {
+                    return data.nombre_completo ?? data.paciente.nombre_completo;
+                }
             },
             {
-                data: 'paciente.dni',
-                title: 'DNI'
+                data: null, // Cambiar a null para manejar la lógica en render
+                title: 'DNI',
+                render: function (data) {
+                    return data.dni ?? data.paciente.dni;
+                }
             },
             {
                 data: 'motivo',
@@ -191,6 +197,11 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        if (new Date(fecha_inicio) > new Date(fecha_fin)) {
+            Swal.fire('Alerta', 'La fecha de inicio no puede ser mayor que la fecha de fin.', 'warning');
+            return;
+        }
+
         $.ajax({
             url: 'reportePorMedico',
             type: 'GET',
@@ -214,6 +225,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (!fecha_inicio || !fecha_fin) {
             Swal.fire('Alerta', 'Selecciona un rango de fechas válido.', 'warning');
+            return;
+        }
+
+        if (new Date(fecha_inicio) > new Date(fecha_fin)) {
+            Swal.fire('Alerta', 'La fecha de inicio no puede ser mayor que la fecha de fin.', 'warning');
             return;
         }
 

@@ -169,7 +169,7 @@
                     <option value="consultas_por_mes">Consultas por mes</option>
                     <option value="consultas_por_medico">Consultas por médico</option>
                     <option value="pacientes_por_servicio">Pacientes atendidos por tipo de servicio</option>
-                    <option value="consultas_pendientes">Consultas pendientes o reprogramadas</option>
+                    <option value="consultas_pendientes">Citas pendientes</option>
                 </select>
             </div>
 
