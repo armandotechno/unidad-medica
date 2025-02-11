@@ -157,10 +157,6 @@
                     GUARDAR CONSULTA
                 </button>
 
-                <button onclick="" type="button" class="btn btn-primary">
-                    IMPRIMIR RECETA
-                </button>
-
                 <button onclick="window.location.href='/citas';" type="button" class="btn btn-primary">
                     CANCELAR CONSULTA
                 </button>
