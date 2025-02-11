@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <label for="edad">Edad</label>
                     <input type="text" class="form-control" id="edad" name="edad" placeholder="Edad"
-                        oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="3" required>
+                        value="{{ session('edad') }}" disabled>
                 </div>
 
                 <div class="form-group">
@@ -137,12 +137,12 @@
 
             <div class="form-row">
                 <div class="form-group">
-                    <label for="medicamentos_recetados">MEDICAMENTOS RECETADOS:</label>
+                    <label for="medicamentos_recetados">Medicamentos recetados:</label>
                     <textarea class="form-control" id="medicamentos_recetados" name="medicamentos_recetados" rows="2"
                         oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';" placeholder="XXX......"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="consultas_previas">CONSULTAS PREVIAS:</label>
+                    <label for="consultas_previas">Consultas previas:</label>
                     <textarea class="form-control" id="consultas_previas" name="consultas_previas" rows="2"
                         oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px';" placeholder="XXX......"></textarea>
                 </div>

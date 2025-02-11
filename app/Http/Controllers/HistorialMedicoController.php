@@ -6,6 +6,7 @@ use App\Models\Cita;
 use App\Models\Consulta;
 use App\Models\Medico;
 use App\Models\Paciente;
+use DateTime;
 use Illuminate\Http\Request;
 
 class HistorialMedicoController extends Controller
@@ -40,7 +41,12 @@ class HistorialMedicoController extends Controller
                 $paciente = Paciente::where('dni', $request->dni)->first();
 
                 if ($paciente !== null) {
-                    session(['paciente_id' => $paciente->id, 'numero_historia' => $paciente->nrohistoria]);
+                    $fecha_nacimiento = new DateTime($paciente->fecha_nac);
+                    $fecha_actual = new DateTime();
+                    $diferencia = $fecha_actual->diff($fecha_nacimiento);
+                    $edad = $diferencia->y;
+
+                    session(['paciente_id' => $paciente->id, 'numero_historia' => $paciente->nrohistoria, 'edad' => $edad]);
                     session(['cita' => $cita]);
 
                     return response()->json([
