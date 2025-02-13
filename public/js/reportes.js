@@ -10,6 +10,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const tipoServicio = document.getElementById('tipo_servicio');
     const generarReporteBtn = document.getElementById('generar_reporte_btn');
 
+    // Función para limpiar los campos y el DataTable
+    function limpiarCampos() {
+        // Limpiar campos de fecha
+        document.getElementById('fecha_inicio').value = '';
+        document.getElementById('fecha_fin').value = '';
+
+        // Limpiar campo de mes y año (si existen)
+        document.getElementById('mes').value = '';
+        document.getElementById('anio').value = '';
+
+        // Limpiar select de médico (si existe)
+        document.getElementById('medico_id').value = '';
+
+        // Limpiar select de servicio (si existe)
+        document.getElementById('servicio_id').value = '';
+
+        // Limpiar el DataTable
+        if ($.fn.DataTable.isDataTable('#consultasTable')) {
+            $('#consultasTable').DataTable().clear().destroy();
+        }
+
+        // Ocultar la tabla
+        document.getElementById('tablaConsultas').style.display = 'none';
+    }
+
     // Función para obtener el título del reporte según el tipo seleccionado
     function obtenerTituloReporte() {
         const tipoReporte = tipoReporteSelect.value;
@@ -40,49 +65,120 @@ document.addEventListener('DOMContentLoaded', function () {
         // Inicializar DataTable con la configuración deseada
         var table = $('#consultasTable').DataTable({
             data: data, // Usar la data devuelta por el servidor
-            columns: [{
-                data: null, // Cambiar a null para manejar la lógica en render
-                title: 'Nombre',
-                render: function (data) {
-                    return data.nombre_completo ?? data.paciente.nombre_completo;
-                }
-            },
-            {
-                data: null, // Cambiar a null para manejar la lógica en render
-                title: 'DNI',
-                render: function (data) {
-                    return data.dni ?? data.paciente.dni;
-                }
-            },
-            {
-                data: 'motivo',
-                title: 'Motivo',
-                render: function (data) {
-                    return data ? data : 'Pendiente'; // Si data está vacío, muestra 'Pendiente'
-                }
-            },
-            {
-                data: 'diagnosticoprin',
-                title: 'Diagnóstico',
-                render: function (data) {
-                    return data ? data : 'Pendiente'; // Si data está vacío, muestra 'Pendiente'
-                }
-            },
-            {
-                data: 'created_at',
-                title: 'Fecha',
-                render: function (data, type, row) {
-                    // Formatear la fecha
-                    const fecha = new Date(data);
-                    const dia = String(fecha.getDate()).padStart(2, '0');
-                    const mes = String(fecha.getMonth() + 1).padStart(2, '0');
-                    const año = fecha.getFullYear();
-                    const horas = String(fecha.getHours()).padStart(2, '0');
-                    const minutos = String(fecha.getMinutes()).padStart(2, '0');
-                    const segundos = String(fecha.getSeconds()).padStart(2, '0');
-                    return `${dia}/${mes}/${año} ${horas}:${minutos}:${segundos}`;
-                }
-            }
+            columns: [
+                {
+                    data: null,
+                    title: 'Departamento',
+                    render: function (data) {
+                        return data.paciente?.departamento?.nombre ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Provincia',
+                    render: function (data) {
+                        return data.paciente?.provincia?.nombre ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Distrito',
+                    render: function (data) {
+                        return data.paciente?.distrito?.nombre ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Ubicación Geográfica',
+                    render: function (data) {
+                        return data.paciente?.ubi_geo?.nombre ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Gobierno Local',
+                    render: function (data) {
+                        return data.paciente?.gob_local?.nombre ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Código Historia',
+                    render: function (data) {
+                        return data.paciente?.nrohistoria ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Ubicación Historia',
+                    render: function (data) {
+                        return data.paciente?.ubihistoria ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null, // Cambiar a null para manejar la lógica en render
+                    title: 'Nombre',
+                    render: function (data) {
+                        return data.nombre_completo ?? data.paciente.nombre_completo;
+                    }
+                },
+                {
+                    data: null, // Cambiar a null para manejar la lógica en render
+                    title: 'DNI',
+                    render: function (data) {
+                        return data.dni ?? data.paciente.dni;
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Género',
+                    render: function (data) {
+                        return (data.paciente?.genero === 'M' ? 'Masculino' : 'Femenino') ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Fecha de Nacimiento',
+                    render: function (data) {
+                        // Verificar si la fecha de nacimiento existe
+                        if (data.paciente?.fecha_nac) {
+                            // Crear un objeto Date a partir de la fecha
+                            const fecha = new Date(data.paciente.fecha_nac);
+
+                            // Extraer día, mes y año
+                            const dia = String(fecha.getDate()).padStart(2, '0'); // Día con 2 dígitos
+                            const mes = String(fecha.getMonth() + 1).padStart(2, '0'); // Mes con 2 dígitos (los meses van de 0 a 11)
+                            const año = fecha.getFullYear(); // Año con 4 dígitos
+
+                            // Formatear la fecha como "día/mes/año"
+                            return `${dia}/${mes}/${año}`;
+                        } else {
+                            // Si no hay fecha de nacimiento, mostrar "Pendiente"
+                            return 'Pendiente';
+                        }
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Dirección',
+                    render: function (data) {
+                        return data.paciente?.direccion ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Tipo de Seguro',
+                    render: function (data) {
+                        return (data.tiposeguro == 1 ? 'Particular' : 'CIS') ?? 'Pendiente';
+                    }
+                },
+                {
+                    data: null,
+                    title: 'Especialidad',
+                    render: function (data) {
+                        return data.especialidad?.nombre ?? 'Pendiente';
+                    }
+                },
             ],
             dom: 'Blfrtip',
             buttons: [
@@ -289,12 +385,15 @@ document.addEventListener('DOMContentLoaded', function () {
     tipoReporteSelect.addEventListener('change', function () {
         const selectedOption = tipoReporteSelect.value;
 
+        // Limpiar campos y DataTable
+        limpiarCampos();
+
         // Mostrar u ocultar campos de fecha
         if (selectedOption === '' || selectedOption === 'consultas_pendientes') {
             fechaInicioGroup.style.display = 'none';
             fechaFinGroup.style.display = 'none';
             mesGroup.style.display = 'none'; // Ocultar campo de mes
-            anioGroup.style.display = 'none'; // Mostrar campo de año
+            anioGroup.style.display = 'none'; // Ocultar campo de año
             tipoServicio.style.display = 'none'; // Ocultar campo de tipo de servicio
         } else if (selectedOption === 'consultas_por_mes') {
             fechaInicioGroup.style.display = 'none';
@@ -306,13 +405,13 @@ document.addEventListener('DOMContentLoaded', function () {
             fechaInicioGroup.style.display = 'none';
             fechaFinGroup.style.display = 'none';
             mesGroup.style.display = 'none'; // Ocultar campo de mes
-            anioGroup.style.display = 'none'; // Mostrar campo de año
+            anioGroup.style.display = 'none'; // Ocultar campo de año
             tipoServicio.style.display = 'block'; // Mostrar campo de tipo de servicio
         } else {
             fechaInicioGroup.style.display = 'block';
             fechaFinGroup.style.display = 'block';
             mesGroup.style.display = 'none'; // Ocultar campo de mes
-            anioGroup.style.display = 'none'; // Mostrar campo de año
+            anioGroup.style.display = 'none'; // Ocultar campo de año
             tipoServicio.style.display = 'none'; // Ocultar campo de tipo de servicio
         }
 

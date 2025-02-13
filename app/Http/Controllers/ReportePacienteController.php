@@ -24,7 +24,8 @@ class ReportePacienteController extends Controller
             $fecha_fin = date('Y-m-d 23:59:59', strtotime($fecha_fin));
         }
 
-        $consultas = Consulta::with('paciente')->whereBetween('created_at', [$fecha_inicio, $fecha_fin])->get();
+        // $consultas = Consulta::with(['paciente.departamento.provincia'])->whereBetween('created_at', [$fecha_inicio, $fecha_fin])->get();
+        $consultas = Consulta::with(['paciente.departamento', 'paciente.provincia', 'paciente.distrito', 'paciente.gobLocal', 'paciente.ubiGeo', 'especialidad'])->whereBetween('created_at', [$fecha_inicio, $fecha_fin])->get();
         // dd($consultas);
 
         return response()->json([
@@ -48,7 +49,7 @@ class ReportePacienteController extends Controller
         }
 
         // Construir la consulta base
-        $query = Consulta::with('paciente')
+        $query = Consulta::with(['paciente.departamento', 'paciente.provincia', 'paciente.distrito', 'paciente.gobLocal', 'paciente.ubiGeo', 'especialidad'])
             ->whereYear('created_at', $anio) // Filtrar por año
             ->whereMonth('created_at', $mes); // Filtrar por mes
 
@@ -75,7 +76,7 @@ class ReportePacienteController extends Controller
         }
 
         // Construir la consulta base
-        $query = Consulta::with('paciente')
+        $query = Consulta::with(['paciente.departamento', 'paciente.provincia', 'paciente.distrito', 'paciente.gobLocal', 'paciente.ubiGeo', 'especialidad'])
             ->where('medico_id', $medico_id);
 
         // Aplicar filtros de fecha si están presentes
@@ -106,7 +107,7 @@ class ReportePacienteController extends Controller
         }
 
         // Filtrar las consultas por el tipo de servicio
-        $reporte = Consulta::with('paciente')
+        $reporte = Consulta::with(['paciente.departamento', 'paciente.provincia', 'paciente.distrito', 'paciente.gobLocal', 'paciente.ubiGeo', 'especialidad'])
             ->where('tiposeguro', $servicio_id)
             ->get();
 

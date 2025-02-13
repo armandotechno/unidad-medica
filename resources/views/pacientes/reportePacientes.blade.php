@@ -253,11 +253,20 @@
             <table id="consultasTable" class="display nowrap table table-hover table-striped table-bordered">
                 <thead>
                     <tr style="text-align: center;">
+                        <th>Departamento</th>
+                        <th>Provincia</th>
+                        <th>Distrito</th>
+                        <th>Ubicación Geográfica</th>
+                        <th>Gobierno Local</th>
+                        <th>Código Historia</th>
+                        <th>Ubicación Historia</th>
                         <th>Nombre</th>
                         <th>DNI</th>
-                        <th>Motivo</th>
-                        <th>Diagnóstico</th>
-                        <th>Fecha</th>
+                        <th>Género</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Dirección</th>
+                        <th>Tipo de Seguro</th>
+                        <th>Especialidad</th>
                     </tr>
                 </thead>
                 <tbody>

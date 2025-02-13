@@ -12,4 +12,10 @@ class Consulta extends Model
         return $this->belongsTo(Paciente::class);
 
     }
+
+    public function especialidad(): BelongsTo {
+
+        return $this->belongsTo(Atencion::class);
+
+    }
 }
