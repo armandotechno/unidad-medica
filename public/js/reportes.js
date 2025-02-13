@@ -199,6 +199,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         return obtenerTituloReporte(); // Título dinámico según el tipo de reporte
                     },
                     className: 'btn btn-danger',
+                    orientation: 'landscape', // Orientación horizontal
+                    pageSize: 'A4', // Tamaño de la página
+                    customize: function (doc) {
+                        // Personalización adicional del PDF
+                        doc.defaultStyle.fontSize = 6;
+                        doc.styles.tableHeader.fontSize = 6;
+                        doc.styles.tableHeader.alignment = 'center';
+                        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+                    }
                 }
             ],
             lengthMenu: [
