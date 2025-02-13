@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     data: null,
                     title: 'Género',
                     render: function (data) {
-                        return (data.paciente?.genero === 'M' ? 'Masculino' : 'Femenino') ?? 'Pendiente';
+                        return (data.genero == 'M' ? 'Masculino' : 'Femenino') ?? 'Pendiente';
                     }
                 },
                 {
