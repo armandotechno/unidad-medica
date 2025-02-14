@@ -171,7 +171,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     data: null,
                     title: 'Tipo de Seguro',
                     render: function (data) {
-                        return (data.tiposeguro == 1 ? 'Particular' : 'CIS') ?? 'Pendiente';
+                        return data.tiposeguro != null
+                            ? (data.tiposeguro == 1 ? 'Particular' : 'CIS')
+                            : 'Pendiente';
                     }
                 },
                 {
